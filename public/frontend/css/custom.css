@@ -1,0 +1,148 @@
+a.page-link.disable {
+    pointer-events: none;
+    cursor: default;
+    color: #00000038;
+}
+
+.product-item .pi-text a h5:hover {
+    color: #e7ab3c;
+}
+
+.active-color {
+    box-shadow: 0 0 3px 3px #ffc107;
+}
+
+#scrollUp, #back-top {
+    background: #e7ab3c;
+    height: 50px;
+    width: 50px;
+    right: 31px;
+    bottom: 18px;
+    position: fixed;
+    color: #fff;
+    font-size: 20px;
+    text-align: center;
+    border-radius: 50%;
+    line-height: 48px;
+    border: 2px solid transparent;
+    box-shadow: 0 0 10px 3px rgba(108, 98, 98, 0.2);
+    z-index: 10;
+}
+
+@media (max-width: 575px) {
+    #scrollUp, #back-top {
+        right: 16px
+    }
+}
+
+#scrollUp a i, #back-top a i {
+    display: block;
+    line-height: 50px;
+    color: #ffffff;
+}
+
+#scrollUp:hover {
+    color: #ffffff;
+}
+
+img.lazy {
+    display: block;
+    /* background-image: url('../../frontend/img/loading.gif'); */
+    background-image: url('../../frontend/img/vku.gif');
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+}
+
+/* h3 {
+    text-align: center;
+    margin: 20px auto;
+} */
+
+.content {
+    text-align: center;
+}
+
+a {
+    color: #333;
+}
+
+.header-title {
+    padding: 5px 10px;
+    background: #dadada;
+    font-weight: bold;
+}
+
+.search-item:hover {
+    color: #e7ab3c;
+}
+
+.search-dropdown {
+    width: 180%;
+}
+
+.twitter-typeahead {
+    width: 240%;
+}
+
+a.comment-reply {
+    color: #9E9E9E;
+}
+
+a.comment-reply:hover {
+    color: #e7ab3c;
+}
+
+.recent-blog .rb-text h6 {
+    white-space: nowrap;
+    width: 150px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+a.comment-remove {
+    color: #1810109f;
+}
+
+a.comment-remove:hover {
+    color: #e7ab3c;
+}
+
+@media(max-width: 576px) {
+    .favorite_col {
+        display: none;
+        margin-left: 100px;
+    }
+    .cart_col {
+        margin-left: 80px;
+    }
+    .table-cart-body h5 {
+        font-size: 13px;
+    }
+    .table-cart-body .p-price.first-row {
+        font-size: 13px;
+    }
+    .table-cart-body .total-price.first-row {
+        font-size: 13px;
+    }
+    .table-cart-body .p-price.first-row.text-uppercase {
+        font-size: 13px;
+    }
+}
+
+a.primary-btn.pd-cart.add-to-cart-icon:hover {
+    opacity: 0.9;
+    color: white;
+}
+
+a.primary-btn.pd-add-cart.add_to_cart.add-to-cart-icon:hover {
+    color: white;
+    opacity: 0.9;
+}
+
+.text-gra-demo {
+    font-size: 72px;
+    background: rgb(226, 229, 229);
+    background: linear-gradient(117deg, rgba(226, 229, 229, 1) 0%, rgba(60, 54, 40, 1) 100%);
+}
+
+

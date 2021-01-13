@@ -1,0 +1,5 @@
+a.page-link.disable {
+    pointer-events: none;
+    cursor: default;
+    color: #00000038;
+}
