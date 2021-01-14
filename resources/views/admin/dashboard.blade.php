@@ -100,10 +100,10 @@
                 <div class="card card-info">
                     <div class="card-header">
                         <button type="button" class="btn btn-default" id="daterange-btn" name="select-btn-filter">
-                            <i class="far fa-calendar-alt"></i> Date range picker
+                            <i class="far fa-calendar-alt"></i> Chọn khoảng thời gian
                             <i class="fas fa-caret-down"></i>
                         </button>
-                        <button class="btn btn-default" id="export-csv">CSV</button>
+                        <button class="btn btn-default" id="export-csv">Xuất CSV</button>
                         <span id="reportrange"></span>
                         <div class="card-tools">
                             <button type="button" class="btn btn-tool" data-card-widget="collapse"><i

@@ -727,7 +727,7 @@ class CheckoutController extends Controller
             $item->save();
         }
         $order = Order::find($id);
-        $order->order_total = number_format($sum);
+        $order->order_total = $sum;
         $order->save();
         return redirect()->back()->with('message', 'Cập nhật đơn hàng thành công!');
     }

@@ -121,12 +121,16 @@
             </div>
 
             <div class="card">
-                <div class="card-header bg-gray">
-                    <h3 class="card-title">Chi tiết đơn hàng</h3>
-                </div>
-                <!-- /.card-header -->
                 <form action="{{ URL::to('/update-order-detail/'.$order->order_id) }}" method="post">
                     @csrf
+                    <div class="card-header bg-gray">
+                        <h3 class="card-title">Chi tiết đơn hàng</h3>
+                        <button onclick="return confirm('Cap nhat muc nay!')" type="submit"
+                            class="btn btn-sm btn-danger float-right">Cập nhật <span class="small">(Mã giảm giá không
+                                được áp dụng khi cập nhật đơn hàng)</span></button>
+                    </div>
+                    <!-- /.card-header -->
+
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap table-warning">
                             <thead>
@@ -155,13 +159,11 @@
                             </tbody>
                         </table>
                     </div>
-                    
-                    <button onclick="return confirm('Cap nhat muc nay!')" type="submit"
-                        class="btn btn-sm btn-danger float-right m-2">Cập nhật <span class="small">(Mã giảm giá không được áp dụng khi cập nhật đơn hàng)</span></button>
                 </form>
 
                 <!-- /.card-body -->
             </div>
+
             <div class="alert alert-secondary text_message" role="alert">
                 Message: {{ $order->message }}
             </div>

@@ -12,12 +12,12 @@ $(document).ready(function () {
       ranges: {
         // 'Today': [moment(), moment()],
         // 'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
-        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
-        'This Month': [moment().startOf('month'), moment().endOf('month')],
-        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+        '7 ngày gần nhất': [moment().subtract(6, 'days'), moment()],
+        '30 ngày gần nhất': [moment().subtract(29, 'days'), moment()],
+        'Tháng này': [moment().startOf('month'), moment().endOf('month')],
+        'Tháng trước': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
       },
-      startDate: moment().subtract(29, 'days'),
+      startDate: moment().subtract(6, 'days'),
       endDate: moment()
     },
     function (start, end) {
@@ -25,7 +25,7 @@ $(document).ready(function () {
       var start = start.format('YYYY-MM-DD');
       var end = end.format('YYYY-MM-DD');
       if (start == "" || end == "") {
-        swal('Bạn chưa nhập dữ liệu!');
+        swal('vui lòng chọn khoảng khoảng thời gian!');
         return false;
       } else {
         start_csv = start;
@@ -63,9 +63,16 @@ $(document).ready(function () {
 
   /*** Gradient ***/
   var ctx = document.getElementById('chart_area').getContext('2d');
-  var gradient = ctx.createLinearGradient(0, 0, 0, 300)
-  gradient.addColorStop(0, '#f6d365')
-  gradient.addColorStop(1, '#fdfbfb')
+  // var gradientFill = ctx.createLinearGradient(0, 0, 0, 500);
+  // gradientFill.addColorStop(0, "rgba(128, 182, 244, 0.6)");
+  // gradientFill.addColorStop(1, "rgba(244, 144, 128, 0.6)");
+  const gradient = ctx.createLinearGradient(0, 0, 0, 500);
+  gradient.addColorStop(0, 'rgba(250,174,50,1)');   
+  gradient.addColorStop(1, 'rgba(250,174,50,0)');
+
+  var gradientStroke = ctx.createLinearGradient(500, 0, 100, 0);
+  gradientStroke.addColorStop(0, "#80b6f4");
+  gradientStroke.addColorStop(1, "#f49080");
 
   var myChart = new Chart(ctx, {
     type: 'line',
@@ -75,9 +82,14 @@ $(document).ready(function () {
         label: 'doanh thu',
         data: [],
         backgroundColor: gradient,
-        pointRadius: 0,
+        borderColor: gradientStroke,
+        pointBorderColor: gradientStroke,
+        pointBackgroundColor: gradientStroke,
+        pointHoverBackgroundColor: gradientStroke,
+        pointHoverBorderColor: gradientStroke,
+        pointRadius: 3,
         // backgroundColor: "transparent",
-        borderColor: "#f6d365",
+        // borderColor: "#f6d365",
         borderWidth: 2
       },
       {
@@ -86,7 +98,8 @@ $(document).ready(function () {
         backgroundColor: "transparent",
         borderColor: "#15ca20",
         borderWidth: 2,
-        borderDash: [4, 4]
+        borderDash: [4, 4],
+        hidden: true,
       }
         ,
       {
@@ -95,6 +108,8 @@ $(document).ready(function () {
         backgroundColor: "transparent",
         borderColor: "#ff6c23",
         borderWidth: 2,
+        hidden: true,
+
         // borderDash: [4, 4]
       }]
     },
