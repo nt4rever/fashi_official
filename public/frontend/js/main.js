@@ -11,6 +11,7 @@
 
 
 (function ($) {
+    
     // Scroll Up
     $('#back-top a').on("click", function () {
         $('body,html').animate({

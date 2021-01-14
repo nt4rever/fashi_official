@@ -32,13 +32,19 @@
                         <div class="form-group">
                             <label for="">Address</label>
                             <textarea class="form-control" name="address" rows="3">
-                                {{ $contact->address }}
+                                {!! $contact->address !!}
                             </textarea>
                         </div>
                         <div class="form-group">
                             <label for="">Social link</label>
                             <textarea class="form-control" name="social" rows="6">
-                                {{ $contact->social }}
+                                {!! $contact->social !!}
+                            </textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="">Introduce</label>
+                            <textarea class="form-control" name="introduce" rows="6">
+                                {!! $contact->introduce !!}
                             </textarea>
                         </div>
                     </div>

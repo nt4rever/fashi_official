@@ -97,15 +97,15 @@
                             <img class="product-big-img lazy"
                                 data-src="{{ URL::asset('uploads/product/'.$product->product_image) }}" />
                             <div class="zoom-icon">
-                             
+
                                 @if ($product->product_quantity==0)
                                 <img src="{{ URL::asset('/frontend/img/sold-out.png') }}" width="80">
-                                @else 
-                                   <i class="fa fa-search-plus"></i>
+                                @else
+                                <i class="fa fa-search-plus"></i>
                                 @endif
-                                
+
                             </div>
-                         
+
                         </div>
                         <div class="product-thumbs">
                             <div class="product-thumbs-track ps-slider owl-carousel">
@@ -159,15 +159,17 @@
                                 <div class="form-group">
                                     <select name="attribute" id="" class="form-control">
                                         @foreach ($product->attribute as $item)
-                                        <option value="{{ $item->id }}" data-price="{{ $item->extra_price }}">Size:
-                                            {{ $item->size }} / Color:
-                                            {{ $item->color }} / Extra price: +{{ $item->extra_price }}đ</option>
+                                        <option value="{{ $item->id }}" data-price="{{ $item->extra_price }}">
+                                            {{ __('Size') }}:
+                                            {{ $item->size }} / {{ __('Color') }}:
+                                            {{ $item->color }} / {{ __('Extra price') }}: +{{ $item->extra_price }}đ
+                                        </option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
                             @endif
-
+                            @if ($product->product_quantity>0)
                             <div class="quantity">
                                 <div class="pro-qty">
                                     <input type="text" value="1" id="product_qty" min="1">
@@ -175,6 +177,7 @@
                                 <a href="#" class="primary-btn pd-cart add-to-cart-icon"
                                     data-product_id="{{ $product->product_id }}">{{ __('Add To Cart') }}</a>
                             </div>
+                            @endif
                             <ul class="pd-tags">
                                 <li><span>{{ __('CATEGORIES') }}</span>: {{ $product->category->category_name }}
                                     @isset($product->category->categoryParent->category_name)
@@ -184,8 +187,9 @@
                                 <li><span>{{ __('BRAND') }}</span>: {{ $product->brand->brand_name }}</li>
                                 <li><span>{{ __('sales quantity') }}</span>: {{ $product->product_sales_quantity }}</li>
                                 @if ($product->product_quantity==0)
-                                <span class="btn btn-outline-warning font-weight-bold" style="cursor: default">SOLD OUT</span>
-                                
+                                <span class="btn btn-outline-warning font-weight-bold"
+                                    style="cursor: default">{{ __('SOLD OUT') }}</span>
+
                                 @else
                                 <li><span>{{ __('AVAILABILITY') }}</span>: {{ $product->product_quantity}}</li>
                                 @endif
@@ -383,7 +387,7 @@
 
                                     @isset($customer_id)
                                     <div class="personal-rating">
-                                        <h6>Your Rating</h6>
+                                        <h6>{{ __('Your Rating') }}</h6>
                                         <div class="rating">
                                             <ul class="list-inline" title="Rating" style="display: inline">
                                                 @for ($i = 1; $i <= 5; $i++) @php if($i<=$rating){
@@ -409,10 +413,10 @@
                                                     @csrf
                                                     @if ($customer_id)
                                                     <div class="col-lg-12 float-left">
-                                                        <input type="text" name="reply_to" disabled value="Reply all"
-                                                            style="width: 70%" data-id="">
+                                                        <input type="text" name="reply_to" disabled
+                                                            value="{{ __('Reply all') }}" style="width: 70%" data-id="">
                                                         <button class="btn btn-default cancel_reply"
-                                                            style="width: 20%">Cancel reply</button>
+                                                            style="width: 20%">{{ __('Cancel reply') }}</button>
                                                     </div>
                                                     <div class="col-lg-12">
                                                         <textarea placeholder="Messages"
@@ -463,8 +467,8 @@
                             <li class="w-icon active"><a href="#" class="primary-btn pd-cart"
                                     data-product_id="{{ $item->product_id }}"><i class="icon_bag_alt"></i></a></li>
 
-                            <li class="quick-view"><a href="{{ URL::to('/product/'.$item->product_slug) }}">+ View
-                                    detail</a></li>
+                            <li class="quick-view"><a href="{{ URL::to('/product/'.$item->product_slug) }}">+
+                                    {{__('View detail')}}</a></li>
                             <li class="w-icon"><a href="#" class="button_wishlist" id="{{ $item->product_id }}"
                                     onclick="add_wishlist(this.id)"> <i class="icon_heart_alt"></i></a></li>
                         </ul>

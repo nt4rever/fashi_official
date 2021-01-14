@@ -210,7 +210,7 @@
                                                     class="icon_bag_alt"></i></a>
                                         </li>
                                         <li class="quick-view"><a href="#" class="home_quick_view"
-                                                data-id="{{ $item->product_id }}">Quick view +</a></li>
+                                                data-id="{{ $item->product_id }}">{{ __('Quick view') }} +</a></li>
                                         <li class="w-icon"><a href="#" class="button_wishlist"
                                                 id="{{ $item->product_id }}" onclick="add_wishlist(this.id)"> <i
                                                     class="icon_heart_alt"></i></a></li>

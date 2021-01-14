@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <span>Login</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <span>{{ __('Login') }}</span>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
-                    <h2>Login</h2>
+                    <h2>{{ __('Login') }}</h2>
                     @if(Session::get('message'))
                     <div class="alert alert-danger" role="alert">
                         @php
@@ -33,7 +33,7 @@
                     <form action="{{ URL::to('/login-customer-handle') }}" method="POST">
                         @csrf
                         <div class="group-input">
-                            <label for="username">Email address *</label>
+                            <label for="username">{{ __('Email address') }} *</label>
                             @php
                             $username = Session::get('username');
                             @endphp
@@ -50,18 +50,17 @@
 
                         </div>
                         <div class="group-input">
-                            <label for="pass">Password *</label>
+                            <label for="pass">{{ __('Password') }} *</label>
                             <input type="password" id="customer_password" name="customer_password" required>
                         </div>
                         <div class="group-input gi-check">
                             <div class="gi-more">
                                 <label for="save-pass">
-                                    Save Password
+                                    {{ __('Save Password') }}
                                     <input type="checkbox" id="save-pass">
                                     <span class="checkmark"></span>
                                 </label>
-                                <a href="{{ URL::to('/forget-password-customer') }}" class="forget-pass">Forget your
-                                    Password</a>
+                                <a href="{{ URL::to('/forget-password-customer') }}" class="forget-pass">{{ __('Forget your Password') }}</a>
                             </div>
                         </div>
                         <div class="group-input">
@@ -77,10 +76,10 @@
                             <strong>{{$errors->first('g-recaptcha-response')}}</strong>
                         </span>
                         @endif
-                        <button type="submit" class="site-btn login-btn">Sign In</button>
+                        <button type="submit" class="site-btn login-btn">{{ __('Sign In') }}</button>
                     </form>
                     <div class="switch-login">
-                        <a href="{{ URL::to('/register-customer') }}" class="or-login">Or Create An Account</a>
+                        <a href="{{ URL::to('/register-customer') }}" class="or-login">{{ __('Or Create An Account') }}</a>
                     </div>
                 </div>
             </div>

@@ -45,7 +45,7 @@
                                         <img src="{{ URL::asset('uploads/post/'.$previous->post_image) }}" alt="">
                                     </div>
                                     <div class="pb-text">
-                                        <span>Previous Post:</span>
+                                        <span>{{ __('Previous Post') }}:</span>
                                         <h5>{{ $previous->post_title }}</h5>
                                     </div>
                                 </a>
@@ -63,7 +63,7 @@
                                         <i class="ti-arrow-right"></i>
                                     </div>
                                     <div class="nb-text">
-                                        <span>Next Post:</span>
+                                        <span>{{ __('Next Post') }}:</span>
                                         <h5>{{ $next->post_title }}</h5>
                                     </div>
                                 </a>
@@ -91,18 +91,18 @@
                     <div class="leave-comment">
                         @if (Session::get('customer_name'))
                         <input type="hidden" name="customer_id" value="{{ Session::get('customer_id') }}">
-                        <h4>Leave A Comment</h4>
+                        <h4>{{ __('Leave A Comment') }}</h4>
                         <form action="#" class="comment-form">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-12">
                                     <textarea placeholder="Messages" name="comment_content"></textarea>
-                                    <button type="reset" class="site-btn send_comment">Send message</button>
+                                    <button type="reset" class="site-btn send_comment">{{ __('Send message') }}</button>
                                 </div>
                             </div>
                         </form>
                         @else
-                        <p style="font-weight: bold">Login to leave a comment!</p>
+                        <p style="font-weight: bold">{{ __('Login to leave a comment') }}!</p>
                         @endif
 
                     </div>

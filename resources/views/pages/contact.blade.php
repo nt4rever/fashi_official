@@ -36,8 +36,7 @@
             <div class="col-lg-5">
                 <div class="contact-title">
                     <h4>Contacts Us</h4>
-                    <p>Contrary to popular belief, Lorem Ipsum is simply random text. It has roots in a piece of
-                        classical Latin literature from 45 BC, maki years old.</p>
+                    <p>{!! $contact->introduce !!}</p>
                 </div>
                 <div class="contact-widget">
                     <div class="cw-item">

@@ -5,9 +5,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <a href="{{ URL::to('/shop') }}">Shop</a>
-                    <span>Order History</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <a href="{{ URL::to('/shop') }}">{{ __('Shop') }}</a>
+                    <span>{{ __('Order History') }}</span>
                 </div>
             </div>
         </div>
@@ -35,11 +35,11 @@
                                 <div class="card-heading active p-2"
                                     style="font-weight: 600;background-image: linear-gradient(240deg, #fdfbfb 0%, #ebedee 100%);">
 
-                                    Order: {{ $item_1->order_id }} -
+                                    {{ __('Order') }}: {{ $item_1->order_id }} -
                                     {{ date_format($item_1->created_at,"Y/m/d H:i:s") }} -
                                     @php
                                     if($item_1->order_status==0){
-                                    echo '<span class="badge badge-secondary">Đang chờ xữ lí</span>';
+                                    echo '<span class="badge badge-secondary">Đang chờ xử lý</span>';
                                     }
                                     else if($item_1->order_status==1){
                                     echo '<span class="badge badge-success">Đã xác nhận</span>';
@@ -62,11 +62,11 @@
                                     <div class="container">
                                         <form action="#" class="checkout-form">
                                             <div class="row">
-                                                <div class="col-lg-5">
+                                                <div class="col-lg-4">
                                                     <div class="place-order">
                                                         <div class="order-total">
                                                             <ul class="order-table">
-                                                                <li>Order <span>{{ $item_1->order_id  }}</span></li>
+                                                                <li>{{ __('Order') }} <span>{{ $item_1->order_id  }}</span></li>
                                                                 @if ($item_1->discount!="")
                                                                 <li class="fw-normal">Coupon
                                                                     <span>{{ $item_1->coupon_code }}</span>
@@ -74,22 +74,22 @@
                                                                 <li class="fw-normal">Sub total
                                                                     <span>{{ number_format($item_1->order_total) }}
                                                                         đ</span></li>
-                                                                <li class="fw-normal">Discount
+                                                                <li class="fw-normal">{{ __('Discount') }}
                                                                     <span>-{{ number_format($item_1->discount)}}
                                                                         đ</span></li>
                                                                 @if (filter_var($item_1->order_total,
                                                                 FILTER_SANITIZE_NUMBER_FLOAT,
                                                                 FILTER_FLAG_ALLOW_FRACTION) >= $item_1->discount)
-                                                                <li class="total-price">Total
+                                                                <li class="total-price">{{ __('Total') }}
                                                                     <span>{{  number_format(filter_var($item_1->order_total, FILTER_SANITIZE_NUMBER_FLOAT,
                                                                                 FILTER_FLAG_ALLOW_FRACTION) - $item_1->discount) }} đ</span>
                                                                     @else
-                                                                <li class="total-price">Total <span>0 đ</span>
+                                                                <li class="total-price">{{ __('Total') }} <span>0 đ</span>
                                                                     @endif
 
                                                                 </li>
                                                                 @else
-                                                                <li class="total-price">Total
+                                                                <li class="total-price">{{ __('Total') }}
                                                                     <span>{{ number_format($item_1->order_total) }}
                                                                         đ</span></li>
                                                                 @endif
@@ -97,7 +97,7 @@
                                                             <div class="order-btn">
                                                                 @php
                                                                 if($item_1->order_status==0){
-                                                                echo '<button class="btn btn-secondary" disabled>Đang xữ
+                                                                echo '<button class="btn btn-secondary" disabled>Đang xử
                                                                     lý</button><a href="#" class="cancel-order"
                                                                     data-id="'.$item_1->order_id.'"><button
                                                                         class="btn btn-danger ml-1">Huỷ đơn
@@ -124,37 +124,36 @@
                                                         </div>
                                                     </div>
                                                     <div class="mt-3">
-                                                        <p class="font-weight-bold">Payment method:
+                                                        <p class="font-weight-bold">{{ __('Payment method') }}:
                                                             @if($item_1->payment_id==1)
                                                             VNPAY
                                                             @else
-                                                            Cash on delivery
+                                                            {{ __('Cash on delivery') }}
                                                             @endif</p>
-                                                        <p class="font-weight-bold">Shipping information:</p>
-                                                        <p>Name: {{ $item_1->shipping->shipping_name }}</p>
-                                                        <p>Address: {{ $item_1->shipping->shipping_address }}</p>
-                                                        <p>Phone: {{ $item_1->shipping->shipping_phone }}</p>
-                                                        <p>Email: {{ $item_1->shipping->shipping_email }}</p>
-                                                        <p>Note: {{ $item_1->shipping->shipping_note }}</p>
+                                                        <p class="font-weight-bold">{{ __('Shipping information') }}:</p>
+                                                        <p>{{ __('Name') }}: {{ $item_1->shipping->shipping_name }}</p>
+                                                        <p>{{ __('Address') }}: {{ $item_1->shipping->shipping_address }}</p>
+                                                        <p>{{ __('Phone') }}: {{ $item_1->shipping->shipping_phone }}</p>
+                                                        <p>{{ __('Email') }}: {{ $item_1->shipping->shipping_email }}</p>
+                                                        <p>{{ __('Note') }}: {{ $item_1->shipping->shipping_note }}</p>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-lg-7">
+                                                <div class="col-lg-8">
 
                                                     <table>
                                                         <thead>
                                                             <tr>
-                                                                <th>Image</th>
-                                                                <th class="p-name">Product Name</th>
-                                                                <th>Price</th>
-                                                                <th>Quantity</th>
-                                                                <th>Attribute</th>
-                                                                <th>Total</th>
+                                                                <th>{{ __('Image') }}</th>
+                                                                <th class="p-name">{{ __('Product Name') }}</th>
+                                                                <th>{{ __('Price') }}</th>
+                                                                <th>{{ __('Quantity') }}</th>
+                                                                <th>{{ __('Attribute') }}</th>
+                                                                <th>{{ __('Total') }}</th>
                                                             </tr>
                                                         </thead>
                                                         <tbody class="table-cart-body">
                                                             @foreach ($item_1->order_detail as $item)
-
                                                             <tr>
                                                                 <td class="cart-pic first-row"><img
                                                                         src="{{ URL::asset('uploads/product/'.$item->product->product_image) }}"
@@ -176,10 +175,10 @@
                                                             @endforeach
                                                         </tbody>
                                                     </table>
-                                                    <p>Time: {{ $item_1->created_at }}</p>
+                                                    <p>{{ __('Time') }}: {{ $item_1->created_at }}</p>
                                                     @if ($item_1->message)
                                                     <div class="alert alert-warning" role="alert">
-                                                        Message: {{ $item_1->message }}
+                                                        {{ __('Message') }}: {{ $item_1->message }}
                                                     </div>
                                                     @endif
 

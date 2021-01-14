@@ -6,9 +6,9 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text product-more">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <a href="{{ URL::to('/shop') }}">Shop</a>
-                    <span>Check Out</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <a href="{{ URL::to('/shop') }}">{{ __('Shop') }}</a>
+                    <span>{{ __('Check Out') }}</span>
                 </div>
             </div>
         </div>
@@ -27,16 +27,16 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="checkout-content">
-                        <p class="content-btn">Please fill in the form below</p>
+                        <p class="content-btn">{{ __('Please fill in the form below') }}</p>
                     </div>
-                    <h4>Biiling Details</h4>
+                    <h4>{{ __('Biiling Details') }}</h4>
                     <div class="row">
                         <div class="col-lg-6">
-                            <label for="fir">First Name<span>*</span></label>
+                            <label for="fir">{{ __('First Name') }}<span>*</span></label>
                             <input type="text" id="fir" name="fir" required value="{{ old('fir') }}">
                         </div>
                         <div class="col-lg-6">
-                            <label for="last">Last Name<span>*</span></label>
+                            <label for="last">{{ __('Last Name') }}<span>*</span></label>
                             <input type="text" id="last" name="last" required value="{{ old('last') }}">
                         </div>
                         <div class="col-lg-6">
@@ -61,21 +61,21 @@
                             </select>
                         </div>
                         <div class="col-lg-12">
-                            <label for="street">Address<span>*</span></label>
+                            <label for="street">{{ __('Address') }}<span>*</span></label>
                             <input type="text" id="street" class="street-first" name="street" required
                                 value="{{ old('street') }}">
                         </div>
                         <div class="col-lg-6">
-                            <label for="email">Email Address<span>*</span></label>
+                            <label for="email">{{ __('Email Address') }}<span>*</span></label>
                             <input type="email" id="email" name="email" required value="{{ old('email') }}">
                         </div>
                         <div class="col-lg-6">
-                            <label for="phone">Phone<span>*</span></label>
+                            <label for="phone">{{ __('Phone') }}<span>*</span></label>
                             <input type="text" id="phone" name="phone" required
                                 value="{{ old('phone') }}">
                         </div>
                         <div class="col-lg-12">
-                            <label for="note">Note</label>
+                            <label for="note">{{ __('Note') }}</label>
                             <textarea name="note" id="note" rows="5" class="form-control"></textarea>
                         </div>
 
@@ -86,7 +86,7 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="checkout-content">
-                        <input type="text" placeholder="Enter Your Coupon Code" value="@if (Session::get('coupon'))
+                        <input type="text" placeholder="Coupon Code: null" value="@if (Session::get('coupon'))
                             @php
                                 $cou = Session::get('coupon');
                                 foreach($cou as $coupon){
@@ -96,13 +96,13 @@
                         @endif" disabled>
                     </div>
                     <div class="place-order">
-                        <h4>Your Order</h4>
+                        <h4>{{ __('Your Order') }}</h4>
                         @php
                         $cart = Cart::content();
                         @endphp
                         <div class="order-total">
                             <ul class="order-table">
-                                <li>Product <span>Total</span></li>
+                                <li>{{ __('Product') }} <span>{{ __('Total') }}</span></li>
                                 @foreach ($cart as $item)
                                 <li class="fw-normal">{{ $item->name }} x {{ $item->qty }} -
                                     {{ $item->options->attribute }}
@@ -146,7 +146,7 @@
                             <div class="payment-check">
                                 <div class="pc-item">
                                     <label for="pc-check">
-                                        CashPayment
+                                        {{ __('CashPayment') }}
                                         <input type="radio" id="pc-check" name="payment" value="0" checked>
                                         <span class="checkmark"></span>
                                     </label>
@@ -160,9 +160,9 @@
                                 </div>
                                 <br>
                                 <div class="payment-check">
-                                    <label for="phone">Bank <span>(for vnpay)</span></label>
+                                    <label for="phone">{{ __('Bank') }} <span>({{ __('for vnpay') }})</span></label>
                                     <select name="bankcode" id="bankcode" class="form-control">
-                                        <option value="">Không chọn </option>
+                                        <option value="">Mặc định </option>
                                         <option value="VNPAYQR">VNPAYQR</option>
                                         <option value="VNBANK">LOCAL BANK</option>
                                         <option value="IB">INTERNET BANKING</option>
@@ -216,7 +216,7 @@
                             </div>
                             <div class="order-btn">
 
-                                <button type="submit" class="site-btn place-btn">Place Order</button>
+                                <button type="submit" class="site-btn place-btn">{{ __('Place Order') }}</button>
                             </div>
                         </div>
                     </div>

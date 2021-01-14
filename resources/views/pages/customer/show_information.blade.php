@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="#"><i class="fa fa-home"></i> Home</a>
-                    <span>User - Information</span>
+                    <a href="#"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <span>{{ __('User - Information') }}</span>
                 </div>
             </div>
         </div>
@@ -30,7 +30,7 @@
                 </div>
                 @endif
                 <div class="contact-title">
-                    <h4>Your account</h4>
+                    <h4>{{ __('Your account') }}</h4>
                 </div>
                 <div class="contact-widget">
                     <div class="cw-item">
@@ -38,7 +38,7 @@
                             <i class="ti-text"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Name:</span>
+                            <span>{{ __('Name') }}:</span>
                             <p>{{ $user->customer_name }}</p>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
                             <i class="ti-location-pin"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Address:</span>
+                            <span>{{ __('Address') }}:</span>
                             @isset($user->customer_address)
                             <p>{{ $user->customer_address }}</p>
                             @else
@@ -60,7 +60,7 @@
                             <i class="ti-mobile"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Phone:</span>
+                            <span>{{ __('Phone') }}:</span>
                             @isset($user->customer_phone)
                             <p>{{ $user->customer_phone }}</p>
                             @else
@@ -89,12 +89,11 @@
                             <img src="{{ $user->customer_image }}" alt="" style='max-width: 250px;
                             margin-bottom: 20px;'>
                             @else
-                            <p>You need update avatar!</p>
+                            <p>{{ __('You need update avatar') }}!</p>
                             @endisset
                         </div>
-                        <button class="site-btn" data-toggle="modal" data-target="#modal-update">Update</button>
-                        <button class="site-btn" data-toggle="modal" data-target="#modal-password">Change
-                            password</button>
+                        <button class="site-btn" data-toggle="modal" data-target="#modal-update">{{ __('Update') }}</button>
+                        <button class="site-btn" data-toggle="modal" data-target="#modal-password">{{ __('Change Password') }}</button>
                     </div>
                 </div>
             </div>
@@ -109,7 +108,7 @@
                 id="form-update-info">
                 @csrf
                 <div class="modal-header">
-                    <h4 class="modal-title">Update your information</h4>
+                    <h4 class="modal-title">{{ __('Update your information') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -117,17 +116,17 @@
                 <div class="modal-body">
 
                     <div class="form-group">
-                        <label for="customer_name">Name:</label>
+                        <label for="customer_name">{{ __('Name') }}:</label>
                         <input type="text" name="customer_name" id="customer_name" class="form-control"
                             value="{{ $user->customer_name }}" required>
                     </div>
                     <div class="form-group">
-                        <label for="customer_address">Address:</label>
+                        <label for="customer_address">{{ __('Address') }}:</label>
                         <input type="text" name="customer_address" id="customer_address" class="form-control"
                             value="{{ $user->customer_address }}" required placeholder="Your address">
                     </div>
                     <div class="form-group">
-                        <label for="customer_phone">Phone:</label>
+                        <label for="customer_phone">{{ __('Phone') }}:</label>
                         <input type="number" name="customer_phone" id="customer_phone" class="form-control"
                             value="{{ $user->customer_phone }}" required placeholder="09xxxxxxx">
                     </div>
@@ -144,7 +143,7 @@
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Save changes') }}</button>
                 </div>
             </form>
         </div>
@@ -160,29 +159,29 @@
             <form action="{{ URL::to('/u/save-change-password') }}" method="post" id="form-change-password">
                 @csrf
                 <div class="modal-header">
-                    <h4 class="modal-title">Change password</h4>
+                    <h4 class="modal-title">{{ __('Change Password') }}</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="">Old password</label>
+                        <label for="">{{ __('Old password') }}</label>
                         <input type="password" class="form-control" name="old_password" id="old_password" required>
                     </div>
                     <div class="form-group">
-                        <label for="">New password</label>
+                        <label for="">{{ __('New password') }}</label>
                         <input type="password" class="form-control" name="new_password" id="new_password" required>
                     </div>
                     <div class="form-group">
-                        <label for="">Repeat new password</label>
+                        <label for="">{{ __('Repeat new password') }}</label>
                         <input type="password" class="form-control" name="repeat_new_password" id="repeat_new_password"
                             required>
                     </div>
                 </div>
                 <div class="modal-footer justify-content-between">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save changes</button>
+                    <button type="submit" class="btn btn-primary">{{ __('Save changes') }}</button>
                 </div>
             </form>
         </div>

@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <span>Forget password</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <span>{{ __('Forget password') }}</span>
                 </div>
             </div>
         </div>
@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col-lg-6 offset-lg-3">
                 <div class="login-form">
-                    <h2>Forget password</h2>
+                    <h2>{{ __('Forget password') }}</h2>
                     @if(Session::get('message'))
                     <div class="alert alert-danger" role="alert">
                         @php
@@ -33,7 +33,7 @@
                     <form action="{{ URL::to('/mail-forget-password-customer') }}" method="POST">
                         @csrf
                         <div class="group-input">
-                            <label for="username">Enter your email address *</label>
+                            <label for="username">{{ __('Enter your email address') }} *</label>
 
                             <input type="email" id="customer_email" name="customer_email" required>
 
@@ -45,10 +45,10 @@
                             <strong>{{$errors->first('g-recaptcha-response')}}</strong>
                         </span>
                         @endif
-                        <button type="submit" class="site-btn login-btn">Get password</button>
+                        <button type="submit" class="site-btn login-btn">{{ __('Get password') }}</button>
                     </form>
                     <div class="switch-login">
-                        <a href="{{ URL::to('/register-customer') }}" class="or-login">Or Create An Account</a>
+                        <a href="{{ URL::to('/register-customer') }}" class="or-login">{{ __('Or Create An Account') }}</a>
                     </div>
                 </div>
             </div>

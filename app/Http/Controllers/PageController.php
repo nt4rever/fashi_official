@@ -37,6 +37,7 @@ class PageController extends Controller
             $con->email = $request->email;
             $con->address = $request->address;
             $con->social = $request->social;
+            $con->introduce = $request->introduce;
             $con->save();
         } else {
             $con =  new ContactPage();
@@ -45,6 +46,7 @@ class PageController extends Controller
             $con->email = $request->email;
             $con->address = $request->address;
             $con->social = $request->social;
+            $con->introduce = $request->introduce;
             $con->save();
         }
         return redirect()->back();

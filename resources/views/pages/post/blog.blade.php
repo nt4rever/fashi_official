@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <span>Blog</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <span>{{ __('Blog') }}</span>
                 </div>
             </div>
         </div>
@@ -22,14 +22,14 @@
             <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1">
                 <div class="blog-sidebar">
                     <div class="search-form">
-                        <h4>Search</h4>
+                        <h4>{{ __('Search') }}</h4>
                         <form action="{{ URL::to('/blog/search') }}" method="get">
-                            <input type="text" placeholder="Search . . .  " name="keyword" required autocomplete="off">
+                            <input type="text" placeholder="{{ __('Search') }} . . .  " name="keyword" required autocomplete="off">
                             <button type="submit"><i class="fa fa-search"></i></button>
                         </form>
                     </div>
                     <div class="blog-catagory">
-                        <h4>Categories</h4>
+                        <h4>{{ __('Categories') }}</h4>
                         <ul>
                             @foreach ($category_post as $item)
                             <li><a
@@ -39,7 +39,7 @@
                         </ul>
                     </div>
                     <div class="recent-post">
-                        <h4>Recent Post</h4>
+                        <h4>{{ __('Recent Post') }}</h4>
                         <div class="recent-blog">
                             @foreach ($recent_post as $item)
                             <a href="{{ URL::to('/blog/view/'.$item->post_slug) }}" class="rb-item" title="{{ $item->post_title }}">

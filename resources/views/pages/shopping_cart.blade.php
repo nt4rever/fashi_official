@@ -71,7 +71,7 @@
                         </tbody>
                     </table>
                     @else
-                    <p>Your shopping cart is empty!</p>
+                    <p>{{ __('Your shopping cart is empty') }}!</p>
                     @endif
                 </div>
                 <div class="row">
