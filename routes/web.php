@@ -306,5 +306,6 @@ Route::get('/login-customer/google/callback', [CustomerController::class, 'callb
 //page
 Route::get('/page/contact', [PageController::class, 'contact']);
 Route::post('/page/contact-save', [PageController::class, 'save_contact']);
+helo
 
 // Route::get('fix', [TagContronller::class, 'fix']);
