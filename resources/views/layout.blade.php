@@ -290,13 +290,13 @@
                             <a href="#"><img src="{{ URL::asset('frontend/img/footer-logo.png') }}" alt=""></a>
                         </div>
                         <ul>
-                            <li>Address: @if (!empty($contact))
+                            <li>{{ __('Address') }}: @if (!empty($contact))
                                 {{ $contact->address }}
                                 @endif</li>
-                            <li>Phone: @if (!empty($contact))
+                            <li>{{ __('Phone') }}: @if (!empty($contact))
                                 {{ $contact->phone }}
                                 @endif</li>
-                            <li>Email: @if (!empty($contact))
+                            <li>{{ __('Email') }}: @if (!empty($contact))
                                 {{ $contact->email }}
                                 @endif</li>
                         </ul>
@@ -309,33 +309,33 @@
                 </div>
                 <div class="col-lg-2 offset-lg-1">
                     <div class="footer-widget">
-                        <h5>Information</h5>
+                        <h5>{{ __('Information') }}</h5>
                         <ul>
-                            <li><a href="{{ URL::to('/contact') }}">About Us</a></li>
-                            <li><a href="{{ URL::to('/shopping-cart') }}">Checkout</a></li>
-                            <li><a href="{{ URL::to('/contact') }}">Contact</a></li>
-                            <li><a href="https://www.facebook.com/levantanlop91">Serivius</a></li>
+                            <li><a href="{{ URL::to('/contact') }}">{{ __('About Us') }}</a></li>
+                            <li><a href="{{ URL::to('/shopping-cart') }}">{{ __('Checkout') }}</a></li>
+                            <li><a href="{{ URL::to('/contact') }}">{{ __('Contact') }}</a></li>
+                            <li><a href="https://www.facebook.com/levantanlop91">{{ __('Services') }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-2">
                     <div class="footer-widget">
-                        <h5>My Account</h5>
+                        <h5>{{ __('My Account') }}</h5>
                         <ul>
-                            <li><a href="{{ URL::to('/u/account') }}">My Account</a></li>
-                            <li><a href="https://www.facebook.com/levantanlop91">Contact</a></li>
-                            <li><a href="{{ URL::to('/shopping-cart') }}">Shopping Cart</a></li>
-                            <li><a href="{{ URL::to('/shop') }}">Shop</a></li>
+                            <li><a href="{{ URL::to('/u/account') }}">{{ __('My Account') }}</a></li>
+                            <li><a href="https://www.facebook.com/levantanlop91">{{ __('Contact') }}</a></li>
+                            <li><a href="{{ URL::to('/shopping-cart') }}">{{ __('Shopping Cart') }}</a></li>
+                            <li><a href="{{ URL::to('/shop') }}">{{ __('Shop') }}</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="newslatter-item">
-                        <h5>Join Our Newsletter Now</h5>
-                        <p>Get E-mail updates about our latest shop and special offers.</p>
+                        <h5>{{ __('Join Our Newsletter Now') }}</h5>
+                        <p>{{ __('Get E-mail updates about our latest shop and special offers') }}.</p>
                         <form action="#" class="subscribe-form">
-                            <input type="text" placeholder="Enter Your Mail">
-                            <button type="button">Subscribe</button>
+                            <input type="text" placeholder="{{ __('Enter Your Mail') }}">
+                            <button type="button">{{ __('Subscribe') }}</button>
                         </form>
                     </div>
                 </div>

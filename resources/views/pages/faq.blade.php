@@ -6,7 +6,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
                     <span>FAQs</span>
                 </div>
             </div>
@@ -51,21 +51,21 @@
                             </ul>
                         </div>
                         @endif
-                        <h4>Do you have any question?</h4>
-                        <p>Our staff will call back later and answer your questions.</p>
+                        <h4>{{ __('Do you have any question') }}?</h4>
+                        <p>{{ __('Our staff will call back later and answer your questions') }}.</p>
                         <form action="{{ URL::to('/ad/add-question-customer') }}" class="comment-form" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your name" name="name" required autocomplete="off">
+                                    <input type="text" placeholder="{{ __('Your name') }}" name="name" required autocomplete="off">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your email" name="email" required
+                                    <input type="text" placeholder="{{ __('Your email') }}" name="email" required
                                         autocomplete="off">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea placeholder="Your question" name="question" required></textarea>
-                                    <button type="submit" class="site-btn">Send</button>
+                                    <textarea placeholder="{{ __('Your question') }}" name="question" required></textarea>
+                                    <button type="submit" class="site-btn">{{ __('Send') }}</button>
                                 </div>
                             </div>
                         </form>

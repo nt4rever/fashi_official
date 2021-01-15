@@ -567,7 +567,7 @@
                                       <td style="padding:5px 0;Margin:0" width="20%" align="left">
                                         <p
                                           style="Margin:0;-webkit-text-size-adjust:none;-ms-text-size-adjust:none;mso-line-height-rule:exactly;font-size:16px;font-family:'open sans', 'helvetica neue', helvetica, arial, sans-serif;line-height:24px;color:#333333">
-                                          {{ $item->price }}</p>
+                                          {{ number_format($item->price) }}</p>
                                       </td>
                                       <td style="padding:5px 0;Margin:0" width="20%" align="left">
                                         <p
@@ -642,7 +642,7 @@
                                           @endif
       
                                           @else
-                                          {{ $order['order_total'] }}
+                                          {{ number_format($order['order_total']) }}
                                           @endif
 
                                           đ</h4>

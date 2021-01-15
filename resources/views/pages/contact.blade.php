@@ -6,8 +6,8 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="breadcrumb-text">
-                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> Home</a>
-                    <span>Contact</span>
+                    <a href="{{ URL::to('/home') }}"><i class="fa fa-home"></i> {{ __('Home') }}</a>
+                    <span>{{ __('Contact') }}</span>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-lg-5">
                 <div class="contact-title">
-                    <h4>Contacts Us</h4>
+                    <h4>{{ __('Contacts Us') }}</h4>
                     <p>{!! $contact->introduce !!}</p>
                 </div>
                 <div class="contact-widget">
@@ -44,7 +44,7 @@
                             <i class="ti-location-pin"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Address:</span>
+                            <span>{{ __('Address') }}:</span>
                             <p>{{ $contact->address }}</p>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                             <i class="ti-mobile"></i>
                         </div>
                         <div class="ci-text">
-                            <span>Phone:</span>
+                            <span>{{ __('Phone') }}:</span>
                             <p>{{ $contact->phone }}</p>
                         </div>
                     </div>
@@ -78,21 +78,21 @@
                             </ul>
                         </div>
                         @endif
-                        <h4>Do you have any question?</h4>
-                        <p>Our staff will call back later and answer your questions.</p>
+                        <h4>{{ __('Do you have any question') }}?</h4>
+                        <p>{{ __('Our staff will call back later and answer your questions') }}.</p>
                         <form action="{{ URL::to('/ad/add-question-customer') }}" class="comment-form" method="post">
                             @csrf
                             <div class="row">
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your name" name="name" required autocomplete="off">
+                                    <input type="text" placeholder="{{ __('Your name') }}" name="name" required autocomplete="off">
                                 </div>
                                 <div class="col-lg-6">
-                                    <input type="text" placeholder="Your email" name="email" required
+                                    <input type="text" placeholder="{{ __('Your email') }}" name="email" required
                                         autocomplete="off">
                                 </div>
                                 <div class="col-lg-12">
-                                    <textarea placeholder="Your question" name="question" required></textarea>
-                                    <button type="submit" class="site-btn">Send</button>
+                                    <textarea placeholder="{{ __('Your question') }}" name="question" required></textarea>
+                                    <button type="submit" class="site-btn">{{ __('Send') }}</button>
                                 </div>
                             </div>
                         </form>

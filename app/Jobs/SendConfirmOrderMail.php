@@ -118,7 +118,7 @@ class SendConfirmOrderMail implements ShouldQueue
                 $output = $output . '0';
             }
         } else {
-            $output = $output . $order->order_total;
+            $output = $output . number_format($order->order_total);
         }
         $output = $output . ' đ</td>
                             </tr>

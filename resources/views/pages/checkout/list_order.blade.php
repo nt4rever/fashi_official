@@ -108,7 +108,7 @@
                                                                     nhận</button></button><a href="#"
                                                                     class="receive-order"
                                                                     data-id="'.$item_1->order_id.'"><button
-                                                                        class="btn btn-info ml-1">Xác nhận đã nhận
+                                                                        class="btn btn-info ml-1 mt-1">Xác nhận đã nhận
                                                                         hàng</button></a>';
                                                                 }
                                                                 else if ($item_1->order_status==2){
