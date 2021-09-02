@@ -305,5 +305,5 @@ Route::post('/page/contact-save', [PageController::class, 'save_contact']);
 Route::post('/uploads-ckeditor', [UploadController::class, 'ckeditor_image']);
 Route::get('/file-browser', [UploadController::class, 'ckeditor_browser']);
 Route::get('/delete-image-ckeditor', [UploadController::class, 'ckeditor_delete']);
-Route::get('/config', [ConfigController::class, 'config']);
-Route::get('/api', [ConfigController::class, 'api']);
+// Route::get('/config', [ConfigController::class, 'config']);
+// Route::get('/api', [ConfigController::class, 'api']);
