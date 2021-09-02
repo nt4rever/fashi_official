@@ -160,14 +160,13 @@ class SendConfirmOrderMail implements ShouldQueue
     {
         $pdf = App::make('dompdf.wrapper');
         $pdf->loadHTML($this->print_checkout_convert($this->order_id));
-        $file_attach = env('APP_URL') . '/hoadon/' . $this->order_id . '_' . date('dmYHis') . '.pdf';
+        $file_attach = public_path().'/hoadon/' . $this->order_id . '_' . date('dmYHis') . '.pdf';
         $pdf->save($file_attach);
+        // $email = new ConfirmOrderMail($this->shipping, $file_attach);
 
-        $email = new ConfirmOrderMail($this->shipping, $file_attach);
-
-        Mail::to($this->email_address)->send($email);
-        if (!Mail::failures()) {
-            unlink($file_attach);
-        }
+        // Mail::to($this->email_address)->send($email);
+        // if (!Mail::failures()) {
+        //     unlink($file_attach);
+        // }
     }
 }
