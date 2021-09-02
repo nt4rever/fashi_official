@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Admin;
 use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -26,7 +26,7 @@ class UserController extends Controller
     {
 
         $this->AuthLogin();
-        $admin = Admin::with('roles')->orderBy('admin_id', 'desc')->paginate(25);
+        $admin = User::with('roles')->orderBy('id', 'desc')->paginate(25);
 
         return view('admin.users.all_user', compact('admin'));
     }
@@ -37,11 +37,11 @@ class UserController extends Controller
         if (Auth::id() == $request->admin_id) {
             return redirect()->back();
         }
-        $user = Admin::where('admin_email', $request->admin_email)->first();
-        if ($user->admin_id == 1) {
-            Session::flash('message', 'Cấp quyền thất bại!');
-            return redirect()->back();
-        }
+        $user = User::where('email', $request->admin_email)->first();
+        // if ($user->id == 1) {
+        //     Session::flash('message', 'Cấp quyền thất bại!');
+        //     return redirect()->back();
+        // }
         $user->roles()->detach(); // delete all connection roles
         if ($request->author_role) {
             $user->roles()->attach(Roles::where('name', 'author')->first());
@@ -63,7 +63,7 @@ class UserController extends Controller
         if (Auth::id() == $id) {
             return redirect()->back();
         }
-        $user = Admin::find($id);
+        $user = User::find($id);
         if ($user) {
             $user->roles()->detach();
             $user->delete();

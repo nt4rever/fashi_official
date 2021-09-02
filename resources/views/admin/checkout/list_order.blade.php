@@ -57,7 +57,7 @@
                                 @endif
 
                                 @else
-                                <td>{{ number_format($item->order_total) }} đ</td>
+                                <td>{{ number_format(floatval($item->order_total)) }} đ</td>
                                 @endif
                                 <td>
                                     @php

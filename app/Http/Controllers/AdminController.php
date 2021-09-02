@@ -29,10 +29,10 @@ class AdminController extends Controller
     public function show_dashboard()
     {
         $this->AuthLogin();
-        $users = DB::table('tbl_admin')->get();
+        $users = DB::table('users')->get();
         $online = 0;
         foreach ($users as $user) {
-            if (Cache::has('admin' . $user->admin_id)) {
+            if (Cache::has('admin' . $user->id)) {
                 $online++;
             }
         }

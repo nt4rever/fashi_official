@@ -30,7 +30,7 @@
                                 <th>Tên User</th>
                                 <th>Email</th>
                                 <th>Phone</th>
-                                <th>Password</th>
+                                {{-- <th>Password</th> --}}
                                 <th>Admin</th>
                                 <th>Author</th>
                                 <th>User</th>
@@ -65,16 +65,16 @@
                                 </tr>
                                 @else --}}
                                 <tr>
-                                    <td>{{ $item->admin_id }}</td>
+                                    <td>{{ $item->id }}</td>
                                     <td>
-                                        {{ $item->admin_name }}</td>
+                                        {{ $item->name }}</td>
                                     <td>
-                                        {{ $item->admin_email }}
+                                        {{ $item->email }}
                                     </td>
-                                    <input type="hidden" name="admin_email" value="{{ $item->admin_email }}">
-                                    <input type="hidden" name="admin_id" value="{{ $item->admin_id }}">
-                                    <td>{{ $item->admin_phone }}</td>
-                                    <td>{{ $item->admin_password }}</td>
+                                    <input type="hidden" name="admin_email" value="{{ $item->email }}">
+                                    <input type="hidden" name="admin_id" value="{{ $item->id }}">
+                                    <td>{{ $item->phone }}</td>
+                                    {{-- <td>{{ $item->password }}</td> --}}
                                     <td><input type="checkbox" name="admin_role"
                                             {{ $item->hasRole('admin') ? 'checked':'' }}></td>
                                     <td><input type="checkbox" name="author_role"
@@ -83,7 +83,7 @@
                                             {{ $item->hasRole('user') ? 'checked':'' }}>
                                     </td>
                                     <td><input type="submit" value="Gán quyền" class="btn btn-sm btn-warning">
-                                        <a href="{{ URL::to('/delete-user-roles/'.$item->admin_id) }}" onclick="return confirm('Xoa muc nay!')"
+                                        <a href="{{ URL::to('/delete-user-roles/'.$item->id) }}" onclick="return confirm('Xoa muc nay!')"
                                             class="btn btn-danger btn-sm">Xoá</a>
                                     </td>
                                 </tr>

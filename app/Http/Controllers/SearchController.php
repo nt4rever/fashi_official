@@ -13,8 +13,8 @@ class SearchController extends Controller
             $product = Product::join('tbl_category', 'tbl_category.category_id', 'tbl_product.category_id')
                 ->where('product_status', 0)->where('category_status', 0)
                 ->where('product_quantity', '>', 0)
-                // ->where('product_name', 'like', '%' . $request->value . '%')
-                ->search($request->value)
+                ->where('product_name', 'like', '%' . $request->value . '%')
+                // ->search($request->value)
                 ->get();
         } else {
             $id = $request->category;
@@ -24,8 +24,8 @@ class SearchController extends Controller
                 ->where(function ($query) use ($id) {
                     return $query->where('tbl_product.category_id', $id)->orWhere('category_parentId', $id);
                 })
-                // ->where('product_name', 'like', '%' . $request->value . '%')
-                ->search($request->value)
+                ->where('product_name', 'like', '%' . $request->value . '%')
+                // ->search($request->value)
                 ->where('product_quantity', '>', 0)
                 ->get();
         }

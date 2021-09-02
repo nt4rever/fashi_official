@@ -44,7 +44,7 @@
                             <select name="thanhpho" id="thanhpho" class="form-control" style="margin-bottom: 25px">
                                 <option value="" disabled selected>Chọn tỉnh - thành phố</option>
                                 @foreach ($thanhpho as $item)
-                                <option value="{{ $item->matp }}">{{ $item->name }}</option>
+                                <option value="{{ $item->name }}" data-id="{{ $item->code }}">{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>

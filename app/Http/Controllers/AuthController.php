@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\Roles;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
 
@@ -38,7 +40,7 @@ class AuthController extends Controller
             'admin_password' => 'required|max:255'
         ]);
 
-        if (Auth::attempt(['admin_email' => $request->admin_email, 'admin_password' => $request->admin_password])) {
+        if (Auth::attempt(['email' => $request->admin_email, 'password' => $request->admin_password])) {
             return Redirect::to('/dashboard');
         } else {
             Session::flash('message', 'Tài khoản hoặc mật khẩu không đúng!');
@@ -60,11 +62,11 @@ class AuthController extends Controller
         $this->AuthLogin();
         $this->validation($request);
         $data = $request->all();
-        $admin = new Admin();
-        $admin->admin_name = $data['admin_name'];
-        $admin->admin_email = $data['admin_email'];
-        $admin->admin_phone = $data['admin_phone'];
-        $admin->admin_password = md5($data['admin_password']);
+        $admin = new User();
+        $admin->name = $data['admin_name'];
+        $admin->email = $data['admin_email'];
+        $admin->phone = $data['admin_phone'];
+        $admin->password = $data['admin_password'];
         $admin->save();
         $admin->roles()->attach(Roles::where('name', 'user')->first());
         return Redirect::to('/auth-users');
@@ -85,10 +87,10 @@ class AuthController extends Controller
     public function my_account($id)
     {
         $this->AuthLogin();
-        if ($id != Auth::user()->admin_id) {
+        if ($id != Auth::user()->id) {
             return Redirect::to('/dashboard');
         }
-        $account = Admin::find($id);
+        $account = User::find($id);
         return view('admin.account.profile', compact('account'));
     }
 
@@ -102,13 +104,13 @@ class AuthController extends Controller
             'admin_repeat_password' => 'required|same:admin_password'
         ]);
 
-        $account = Admin::findOrFail($request->admin_id);
-        if (md5($request->admin_old_password) != $account->admin_password) {
+        $account = User::findOrFail($request->admin_id);
+        if(!Hash::check($request->admin_old_password,$account->password)){
             return redirect()->back()->with('message', 'Old Password Incorrect');
         }
-        $account->admin_name = $request->admin_name;
-        $account->admin_phone = $request->admin_phone;
-        $account->admin_password = md5($request->admin_password);
+        $account->name = $request->admin_name;
+        $account->phone = $request->admin_phone;
+        $account->password = $request->admin_password;
         $account->save();
         if ($request->admin_old_password != $request->admin_password) {
             Auth::logout();

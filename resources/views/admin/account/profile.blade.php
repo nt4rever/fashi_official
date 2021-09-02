@@ -45,7 +45,7 @@
                                 src="{{ URL::asset('backend/dist/img/user4-128x128.jpg') }}" alt="User profile picture">
                         </div>
 
-                        <h3 class="profile-username text-center">{{ $account->admin_name }}</h3>
+                        <h3 class="profile-username text-center">{{ $account->name }}</h3>
 
                         <p class="text-muted text-center">
                             @foreach ($account->roles as $item)
@@ -55,10 +55,10 @@
 
                         <ul class="list-group list-group-unbordered mb-3">
                             <li class="list-group-item">
-                                <b>Email</b> <a class="float-right">{{ $account->admin_email }}</a>
+                                <b>Email</b> <a class="float-right">{{ $account->email }}</a>
                             </li>
                             <li class="list-group-item">
-                                <b>Phone</b> <a class="float-right">{{ $account->admin_phone }}</a>
+                                <b>Phone</b> <a class="float-right">{{ $account->phone }}</a>
                             </li>
                             <li class="list-group-item">
                                 <b>Friends</b> <a class="float-right">13,287</a>
@@ -371,21 +371,21 @@
                                         <label for="admin_name" class="col-sm-2 col-form-label">Name</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="admin_name" id="admin_name"
-                                                placeholder="Name" value="{{ $account->admin_name }}">
+                                                placeholder="Name" value="{{ $account->name }}">
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputEmail" class="col-sm-2 col-form-label">Email</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="admin_email"
-                                                value="{{ $account->admin_email }}" required readonly>
+                                                value="{{ $account->email }}" required readonly>
                                         </div>
                                     </div>
                                     <div class="form-group row">
                                         <label for="inputName2" class="col-sm-2 col-form-label">Phone</label>
                                         <div class="col-sm-10">
                                             <input type="text" class="form-control" name="admin_phone"
-                                                value="{{ $account->admin_phone }}" required>
+                                                value="{{ $account->phone }}" required>
                                         </div>
                                     </div>
                                     <div class="form-group row">
@@ -410,7 +410,7 @@
                                                 required>
                                         </div>
                                     </div>
-                                    <input type="hidden" name="admin_id" value="{{ $account->admin_id }}">
+                                    <input type="hidden" name="admin_id" value="{{ $account->id }}">
                                     <div class="form-group row">
                                         @if ($errors->any())
                                         <div class="alert alert-danger">

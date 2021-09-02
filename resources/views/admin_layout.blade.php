@@ -155,9 +155,9 @@
                             class="img-circle elevation-2" alt="User Image">
                     </div>
                     <div class="info">
-                        <a href="{{ URL::to('/ad/my-account/'.Auth::user()->admin_id) }}" class="d-block">
+                        <a href="{{ URL::to('/ad/my-account/'.Auth::user()->id) }}" class="d-block">
                             @php
-                            echo Auth::user()->admin_name;
+                            echo Auth::user()->name;
                             @endphp
                         </a>
                     </div>
@@ -496,7 +496,6 @@
     <script src="{{ URL::asset('/backend/plugins/bs-custom-file-input/bs-custom-file-input.min.js') }}"></script>
     {{-- Ck editor --}}
     <script src={{ url('ckeditor/ckeditor.js') }}></script>
-    @include('ckfinder::setup')
     {{-- Form vadilator --}}
     <script src="{{ URL::asset('/backend/plugins/jquery-validation/jquery.validate.min.js') }}"></script>
     <script src="{{ URL::asset('/backend/plugins/jquery-validation/additional-methods.min.js') }}"></script>

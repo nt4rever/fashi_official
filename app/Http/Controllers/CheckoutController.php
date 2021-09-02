@@ -23,6 +23,7 @@ use App\View\Components\Recusive;
 use Carbon\Carbon;
 use Cart;
 use Exception;
+use GuzzleHttp\Client;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
@@ -62,7 +63,10 @@ class CheckoutController extends Controller
         }
 
         if ($session_customer) {
-            $thanhpho = DB::table('tbl_tinhthanhpho')->get();
+            // $thanhpho = DB::table('tbl_tinhthanhpho')->get();
+            $client = new Client();
+            $response = $client->get('https://provinces.open-api.vn/api/?depth=1');
+            $thanhpho = json_decode($response->getBody());
             return view('pages.checkout.checkout', compact('thanhpho'));
         } else {
             // Session::put('history', 'cart');
@@ -150,9 +154,9 @@ class CheckoutController extends Controller
         //create shipping
         $shipping = array();
         $shipping['shipping_name'] = $request->fir . " " . $request->last;
-        $thanhpho = DB::table('tbl_tinhthanhpho')->where('matp', $request->thanhpho)->first()->name;
-        $quanhuyen = DB::table('tbl_quanhuyen')->where('maqh', $request->quanhuyen)->first()->name;
-        $xaphuong = DB::table('tbl_xaphuongthitran')->where('xaid', $request->xaphuong)->first()->name;
+        $thanhpho = $request->thanhpho;
+        $quanhuyen = $request->quanhuyen;
+        $xaphuong = $request->xaphuong;
         $shipping['shipping_address'] = $thanhpho . ' - ' . $quanhuyen . ' - ' . $xaphuong . ' - ' . $request->street;
         $shipping['shipping_phone'] = $request->phone;
         $shipping['shipping_email'] = $request->email;

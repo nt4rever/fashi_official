@@ -101,8 +101,9 @@
         $('.textarea').summernote()
     });
     CKEDITOR.replace( 'product_content', {
-        filebrowserBrowseUrl: '{{ route('ckfinder_browser') }}',
-
+        filebrowserImageBrowseUrl: "{{ url('file-browser?_token=' . csrf_token()) }}",
+        filebrowserImageUploadUrl: "{{ url('uploads-ckeditor?_token=' . csrf_token()) }}",
+        filebrowserUploadMethod: "form"
     });
 </script>
 @endpush

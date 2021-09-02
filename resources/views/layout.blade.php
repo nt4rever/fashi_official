@@ -34,7 +34,7 @@
 <body>
     <!-- Page Preloder -->
     <div id="preloder">
-        {{-- <div class="loader"></div> --}}
+        <div class="loader"></div>
     </div>
 
     <input type="hidden" id="myurl" url="{{url('')}}" />

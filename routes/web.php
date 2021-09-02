@@ -8,6 +8,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CategoryPostController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DataAddressController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StatisticController;
 use App\Http\Controllers\TagContronller;
+use App\Http\Controllers\UploadController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
@@ -197,13 +199,6 @@ Route::get('/product-attribute/{id}', [ProductController::class, 'product_attrib
 //product gallery
 Route::get('/product-gallery/{id}', [GalleryController::class, 'list_gallery']);
 
-// install ckFinder
-Route::any('/ckfinder/connector', '\CKSource\CKFinderBridge\Controller\CKFinderController@requestAction')
-    ->name('ckfinder_connector');
-
-Route::any('/ckfinder/browser', '\CKSource\CKFinderBridge\Controller\CKFinderController@browserAction')
-    ->name('ckfinder_browser');
-
 //comment
 Route::post('/add-product-comment', [CommentController::class, 'add_comment']);
 Route::get('/list-product-comment/{id}', [CommentController::class, 'list_product_comment']);
@@ -306,4 +301,9 @@ Route::get('/login-customer/google/callback', [CustomerController::class, 'callb
 //page
 Route::get('/page/contact', [PageController::class, 'contact']);
 Route::post('/page/contact-save', [PageController::class, 'save_contact']);
-// Route::get('fix', [TagContronller::class, 'fix']);
+
+Route::post('/uploads-ckeditor', [UploadController::class, 'ckeditor_image']);
+Route::get('/file-browser', [UploadController::class, 'ckeditor_browser']);
+Route::get('/delete-image-ckeditor', [UploadController::class, 'ckeditor_delete']);
+Route::get('/config', [ConfigController::class, 'config']);
+Route::get('/api', [ConfigController::class, 'api']);

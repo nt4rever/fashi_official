@@ -87,6 +87,12 @@
                                 <a href="https://www.facebook.com/levantanlop91"><i class="fa fa-pinterest"></i></a>
                             </textarea>
                         </div>
+                        <div class="form-group">
+                            <label for="">Introduce</label>
+                            <textarea class="form-control" name="introduce" rows="6">
+                                
+                            </textarea>
+                        </div>
                     </div>
                     <!-- /.card-body -->
 
