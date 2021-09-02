@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\ContactPage;
 use App\View\Components\Recusive;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -53,5 +54,9 @@ class AppServiceProvider extends ServiceProvider
             $view->with('category_navbar', $htmlOption)
                 ->with('option_search', $option_search)->with('category', $category)->with('contact', $contact);
         });
+        if (env('APP_ENV') === 'production') {
+            $this->app['request']->server->set('HTTPS', 'on'); // this line
+            URL::forceScheme('https');
+        }
     }
 }
