@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Storage;
 
 class PostController extends Controller
 {
@@ -99,7 +100,8 @@ class PostController extends Controller
         if ($get_image) {
             $new_image = $request->post_slug . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('uploads/post', $new_image);
-            $post->post_image = $new_image;
+            $post->post_image_name = $new_image;
+            $post->post_image = $this->upload_to_drive($new_image);
         } else {
             $post->post_image = '';
         }
@@ -150,16 +152,18 @@ class PostController extends Controller
             $post->post_slug = $request->post_slug . "-" . date('dmYHis');
         }
         $post->post_status = $request->post_status;
-        $img = $post->post_image;
+        $img = $post->post_image_name;
         $get_image = $request->file('post_image');
         if ($get_image) {
             $new_image = $request->post_slug . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('uploads/post', $new_image);
-            $post->post_image = $new_image;
-            $image_path = "uploads/post/" . $img;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
+            $post->post_image_name = $new_image;
+            $post->post_image = $this->upload_to_drive($new_image);
+            $this->delete_from_drive($img);
+            // $image_path = "uploads/post/" . $img;
+            // if (File::exists($image_path)) {
+            //     File::delete($image_path);
+            // }
         }
         $post->save();
         Session::flash('message', 'Sửa thành công!');
@@ -169,11 +173,12 @@ class PostController extends Controller
     public function delete_post($id)
     {
         $post = Post::find($id);
-        $img = $post->post_image;
-        $image_path = "uploads/post/" . $img;
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
+        $img = $post->post_image_name;
+        $this->delete_from_drive($img);
+        // $image_path = "uploads/post/" . $img;
+        // if (File::exists($image_path)) {
+        //     File::delete($image_path);
+        // }
         $post->delete();
         Session::flash('message', 'Xoá thành công!');
         return Redirect::to('/all-post');
@@ -230,5 +235,30 @@ class PostController extends Controller
         } catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
         }
+    }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/post/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'post')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
     }
 }

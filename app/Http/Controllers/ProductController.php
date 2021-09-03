@@ -18,6 +18,7 @@ use App\View\Components\Recusive;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Excel;
+use Storage;
 
 class ProductController extends Controller
 {
@@ -104,9 +105,11 @@ class ProductController extends Controller
                 $name_image = current(explode('.', $get_name_image));
                 $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
                 $get_image->move('uploads/product', $new_image);
-                $data['product_image'] = $new_image;
+                $data['product_image_name'] = $new_image;
+                $data['product_image'] = $this->upload_to_drive($new_image);
             } else {
                 $data['product_image'] = '';
+                $data['product_image_name'] = '';
             }
 
             $id = $this->product->create($data)->product_id;
@@ -148,11 +151,8 @@ class ProductController extends Controller
         try {
             $id = $request->product_id;
             $product = $this->product->find($id);
-            $image = $product->product_image;
-            $image_path = "uploads/product/" . $image;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
+            $image = $product->product_image_name;
+            $this->delete_from_drive($image);
             $product->delete();
             echo "true";
         } catch (\Exception $exception) {
@@ -204,15 +204,13 @@ class ProductController extends Controller
                 $name_image = current(explode('.', $get_name_image));
                 $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
                 $get_image->move('uploads/product', $new_image);
-                $data['product_image'] = $new_image;
+                $data['product_image_name'] = $new_image;
+                $data['product_image'] = $this->upload_to_drive($new_image);
 
                 //delete image
                 $product = $this->product->find($id);
-                $image = $product->product_image;
-                $image_path = "uploads/product/" . $image;
-                if (File::exists($image_path)) {
-                    File::delete($image_path);
-                }
+                $image = $product->product_image_name;
+                $this->delete_from_drive($image);
             }
 
             $this->product->find($id)->update($data);
@@ -308,5 +306,30 @@ class ProductController extends Controller
             $product->save();
         }
         echo "true";
+    }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/product/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'product')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
     }
 }

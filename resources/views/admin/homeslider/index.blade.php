@@ -32,7 +32,7 @@
                         <tbody>
                             @foreach ($home_slider as $item)
                             <tr>
-                                <td><img src="{{ URL::asset('uploads/homeslider/'.$item->home_slider_image) }}" alt="" style="width: 200px;">
+                                <td><img src="{{ $item->home_slider_image }}" alt="" style="width: 200px;">
                                 </td>
                                 <td>{!! $item->home_slider_desc !!}</td>
                                 <td>{!! $item->home_slider_sale !!}</td>

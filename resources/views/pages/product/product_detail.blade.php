@@ -95,7 +95,7 @@
                     <div class="col-lg-6">
                         <div class="product-pic-zoom">
                             <img class="product-big-img lazy"
-                                data-src="{{ URL::asset('uploads/product/'.$product->product_image) }}" />
+                                data-src="{{ $product->product_image }}" />
                             <div class="zoom-icon">
 
                                 @if ($product->product_quantity==0)
@@ -110,13 +110,13 @@
                         <div class="product-thumbs">
                             <div class="product-thumbs-track ps-slider owl-carousel">
                                 <div class="pt"
-                                    data-imgbigurl="{{ URL::asset('uploads/product/'.$product->product_image) }}">
+                                    data-imgbigurl="{{ $product->product_image }}">
                                     <img class="lazy"
-                                        data-src="{{ URL::asset('uploads/product/'.$product->product_image) }}" />
+                                        data-src="{{ $product->product_image }}" />
                                 </div>
                                 @foreach ($product->gallery as $item)
-                                <div class="pt" data-imgbigurl="{{ URL::asset('uploads/gallery/'.$item->path) }}">
-                                    <img class="lazy" data-src="{{ URL::asset('uploads/gallery/'.$item->path) }}" />
+                                <div class="pt" data-imgbigurl="{{ $item->path }}">
+                                    <img class="lazy" data-src="{{ $item->path }}" />
                                 </div>
                                 @endforeach
                             </div>
@@ -457,7 +457,7 @@
             <div class="col-lg-3 col-sm-6">
                 <div class="product-item">
                     <div class="pi-pic">
-                        <img class="lazy" data-src="{{ URL::asset('uploads/product/'.$item->product_image) }}"
+                        <img class="lazy" data-src="{{ $item->product_image }}"
                             id="wishlist_product_img_{{ $item->product_id }}" />
                         {{-- <img src="{{ URL::asset('uploads/product/'.$item->product_image) }}" alt=""> --}}
                         {{-- <div class="icon">

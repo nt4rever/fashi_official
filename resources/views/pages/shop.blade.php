@@ -194,7 +194,7 @@
                             <div class="product-item">
                                 <div class="pi-pic">
                                     <img class="lazy"
-                                        data-src="{{ URL::asset('uploads/product/'.$item->product_image) }}"
+                                        data-src="{{ $item->product_image }}"
                                         id="wishlist_product_img_{{ $item->product_id }}" />
                                     @if ($item->product_price_discount!=$item->product_price)
                                     <div class="sale pp-sale">Sale</div>

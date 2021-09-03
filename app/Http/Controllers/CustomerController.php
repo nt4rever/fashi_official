@@ -17,6 +17,7 @@ use App\Rules\Captcha;
 use Validator;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
+use Storage;
 
 class CustomerController extends Controller
 {
@@ -173,16 +174,17 @@ class CustomerController extends Controller
                 $get_name_image = $get_image->getClientOriginalName();
                 $name_image = current(explode('.', $get_name_image));
                 $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
-                $get_image->move('uploads/customer', $new_image);
-                $data['customer_image'] = url('/') . '/uploads/customer/' . $new_image;
+                $get_image->move('uploads/avatar', $new_image);
+                $data['customer_image'] = $this->upload_to_drive($new_image);
+                // $data['customer_image'] = url('/') . '/uploads/customer/' . $new_image;
 
-                $old_image = $user->customer_image;
-                if (isset($old_image)) {
-                    $image_path = "uploads/customer/" . $old_image;
-                    if (File::exists($image_path)) {
-                        File::delete($image_path);
-                    }
-                }
+                // $old_image = $user->customer_image;
+                // if (isset($old_image)) {
+                //     $image_path = "uploads/customer/" . $old_image;
+                //     if (File::exists($image_path)) {
+                //         File::delete($image_path);
+                //     }
+                // }
             }
             Customer::where('customer_id', $id)->update($data);
             Session::put('customer_name', $request->customer_name);
@@ -406,5 +408,30 @@ class CustomerController extends Controller
             }
             return redirect('/home');
         }
+    }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/avatar/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'avatar')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
     }
 }

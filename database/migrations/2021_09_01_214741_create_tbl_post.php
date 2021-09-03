@@ -21,6 +21,7 @@ class CreateTblPost extends Migration
             $table->text('post_meta_desc')->nullable();
             $table->string('post_meta_keyword')->nullable();
             $table->string('post_image');
+            $table->string('post_image_name')->nullable();
             $table->tinyInteger('post_status')->default(0);
             $table->unsignedBigInteger('category_post_id');
             $table->string('post_slug');

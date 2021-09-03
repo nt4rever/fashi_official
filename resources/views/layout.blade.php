@@ -162,7 +162,7 @@
                                                 <tr>
                                                     <td class="si-pic">
                                                         <img class="lazy"
-                                                            data-src="{{ URL::asset('uploads/product/'.$item->options->image) }}"
+                                                            data-src="{{ $item->options->image }}"
                                                             width="100px" />
                                                     </td>
                                                     <td class="si-text">

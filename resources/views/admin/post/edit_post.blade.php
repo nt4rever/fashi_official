@@ -51,7 +51,7 @@
                         <div class="form-group">
                             <label for="post_image">Ảnh bài viết</label>
                             <input type="file" class="form-control" name="post_image" id="post_image">
-                            <img src="{{ URL::to('uploads/post/'.$post->post_image) }}" alt="" style="width: 150px"
+                            <img src="{{ $post->post_image }}" alt="" style="width: 150px"
                                 class="mt-2">
                         </div>
                         <div class="form-group">

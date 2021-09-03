@@ -364,7 +364,7 @@ class HomeController extends Controller
                 <div class="col-lg-6">
                     <div class="product-pic-zoom">
                         <img class="product-big-img"
-                            src="' . url('uploads/product/' . $item->product_image) . '" />
+                            src="' . $item->product_image . '" />
                         <div class="zoom-icon">
                             <i class="fa fa-search-plus"></i>
                         </div>

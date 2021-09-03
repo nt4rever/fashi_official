@@ -50,7 +50,7 @@
                                         {!! $value->post_desc !!}
                                     </div>
                                 </td>
-                                <td><img src="{{ URL::to('uploads/post/'.$value->post_image) }}" alt=""
+                                <td><img src="{{ $value->post_image }}" alt=""
                                         style="width: 80px"></td>
                                 <td>{{ $value->category->category_post_name }}</td>
                                 <td class="text-nowrap">{{ $value->post_status==0?'Hiển thị' : 'Ẩn' }}</td>

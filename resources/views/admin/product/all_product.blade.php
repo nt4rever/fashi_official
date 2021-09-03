@@ -91,7 +91,7 @@
                                 <td>{{ $value ->product_quantity }} <span
                                         class="text-muted small">({{ $value->product_sales_quantity }})</span></td>
                                 <td>
-                                    <img src="{{ URL::asset('/uploads/product/'.$value ->product_image) }}"
+                                    <img src="{{ $value ->product_image }}"
                                         alt="{{ $value ->product_name }}" style="width: 80px">
                                 </td>
                                 <td class="text-nowrap">

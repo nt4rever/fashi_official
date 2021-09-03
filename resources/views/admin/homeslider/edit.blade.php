@@ -19,7 +19,7 @@
                             <label for="home_slider_image">Ảnh silde</label></label>
                             <input type="file" class="form-control" name="home_slider_image">
                         </div>
-                        <img src="{{ URL::asset('uploads/homeslider/'.$home_slider->home_slider_image) }}" alt=""
+                        <img src="{{ $home_slider->home_slider_image }}" alt=""
                             style="width: 200px;">
                         <div class="form-group">
                             <label for="brand_desc">Mô tả</label>

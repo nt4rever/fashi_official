@@ -44,7 +44,7 @@
                             @foreach ($cart as $item)
                             <tr>
                                 <td class="cart-pic first-row"><img
-                                        src="{{ URL::asset('uploads/product/'.$item->options->image) }}" alt=""
+                                        src="{{ $item->options->image }}" alt=""
                                         style="width: 100px"></td>
                                 <td class="cart-title first-row">
                                     <a href="{{ URL::to('/product/'.$item->options->slug) }}">

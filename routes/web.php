@@ -13,6 +13,7 @@ use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DataAddressController;
 use App\Http\Controllers\DealController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\FaqController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\HomeController;
@@ -307,3 +308,5 @@ Route::get('/file-browser', [UploadController::class, 'ckeditor_browser']);
 Route::get('/delete-image-ckeditor', [UploadController::class, 'ckeditor_delete']);
 // Route::get('/config', [ConfigController::class, 'config']);
 // Route::get('/api', [ConfigController::class, 'api']);
+
+ Route::get('/drive', [DocumentController::class, 'list']);

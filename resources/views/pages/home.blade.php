@@ -12,7 +12,7 @@
         @isset($home_slider)
         @foreach ($home_slider as $item)
         <div class="single-hero-items set-bg"
-            data-setbg="{{ URL::asset('uploads/homeslider/'.$item->home_slider_image) }}">
+            data-setbg="{{ $item->home_slider_image }}">
             <div class="container">
                 <div class="row">
                     <div class="col-lg-5">
@@ -83,7 +83,7 @@ $numerical_order++;
             @if ($numerical_order % 2)
             <div class="col-lg-3">
                 <div class="product-large set-bg"
-                    data-setbg="{{ URL::asset('uploads/category/'.$value->category_image) }}">
+                    data-setbg="{{$value->category_image}}">
                     <h2>{{ $value->category_name }}</h2>
                     <a href="{{ URL::to('/category/'.$value->category_slug) }}">{{ __('Discover More') }}</a>
                 </div>
@@ -111,7 +111,7 @@ $numerical_order++;
                         @foreach ($itemChildren->products as $item2)
                         <div class="product-item">
                             <div class="pi-pic">
-                                <img class="lazy" data-src="{{ URL::asset('uploads/product/'.$item2->product_image)}}"
+                                <img class="lazy" data-src="{{ $item2->product_image}}"
                                     id="wishlist_product_img_{{ $item2->product_id }}" />
                                 @if ($item2->product_price_discount!=$item2->product_price)
                                 <div class="sale">Sale</div>
@@ -162,7 +162,7 @@ $numerical_order++;
                 @if (!($numerical_order % 2))
                 <div class="col-lg-3 offset-lg-1">
                     <div class="product-large set-bg"
-                        data-setbg="{{ URL::asset('uploads/category/'.$value->category_image) }}">
+                        data-setbg="{{ $value->category_image }}">
                         <h2>{{ $value->category_name }}</h2>
                         <a href="{{ URL::to('/category/'.$value->category_slug) }}">{{ __('Discover More') }}</a>
                     </div>
@@ -219,7 +219,7 @@ $numerical_order++;
                     class="primary-btn">{{ __('Shop Now') }}</a>
             </div>
             <div class="col-lg-6 text-center">
-                <img src="{{ URL::asset('uploads/product/'.$item->product->product_image) }}" alt=""
+                <img src="{{ $item->product->product_image }}" alt=""
                     style="max-height:100% ">
             </div>
         </div>
@@ -294,7 +294,7 @@ deal.push(newItem);
             @foreach ($post_home as $item)
             <div class="col-lg-4 col-md-6">
                 <div class="single-latest-blog">
-                    <img src="{{ URL::asset('uploads/post/'.$item->post_image)}}" alt="">
+                    <img src="{{ $item->post_image}}" alt="">
                     <div class="latest-text">
                         <div class="tag-list">
                             <div class="tag-item">

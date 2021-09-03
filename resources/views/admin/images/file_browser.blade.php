@@ -88,12 +88,12 @@
         @foreach ($fileNames as $file)
             <div class="thumbnail">
                 <ul class="file-list">
-                    <li><img src="{{ asset('uploads/ckeditor/' . $file) }}" alt="thumb"
-                            title="{{ asset('uploads/ckeditor/' . $file) }}" height="100">
+                    <li><img src="{{ "https://drive.google.com/uc?id=".$file."&export=media" }}" alt="thumb"
+                            title="{{ "https://drive.google.com/uc?id=".$file."&export=media" }}" height="100">
                         <br>
                         <span style="color:darkblue">{{ $file }}</span>
                         <br>
-                        <a href="#" class="delete_image" data-path="{{ 'uploads/ckeditor/' . $file }}"><i
+                        <a href="#" class="delete_image" data-path="{{  $file }}"><i
                                 class="fas fa-trash"></i></a>
                     </li>
                 </ul>

@@ -17,6 +17,7 @@ class CreateTblProduct extends Migration
             $table->id('product_id');
             $table->string('product_name');
             $table->string('product_image');
+            $table->string('product_image_name')->nullable();
             $table->text('product_desc')->nullable();
             $table->text('product_content')->nullable();
             $table->integer('product_price');

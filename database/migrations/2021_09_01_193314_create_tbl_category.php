@@ -19,6 +19,7 @@ class CreateTblCategory extends Migration
             $table->text('category_desc')->nullable();
             $table->tinyInteger('category_status')->default(0);
             $table->string('category_image')->nullable();
+            $table->string('category_image_name')->nullable();
             $table->integer('category_parentId')->default(0);
             $table->tinyInteger('role')->default(0);
             $table->string('category_slug');

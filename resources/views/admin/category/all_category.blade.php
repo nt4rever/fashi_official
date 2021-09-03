@@ -82,8 +82,10 @@
                                     @endphp
                                 </td>
                                 @if ($value->category_image)
-                                <td><img src="{{ URL::asset('/uploads/category/'.$value->category_image) }}" alt=""
-                                        style="width: 100px;"></td>
+                                {{-- <td><img src="{{ URL::asset('/uploads/category/'.$value->category_image) }}" alt=""
+                                        style="width: 100px;"></td> --}}
+                                        <td><img src="{{ $value->category_image }}" alt=""
+                                            style="width: 100px;"></td>
                                 @else
                                 <td>null</td>
                                 @endif

@@ -44,7 +44,7 @@
                             @foreach ($recent_post as $item)
                             <a href="{{ URL::to('/blog/view/'.$item->post_slug) }}" class="rb-item" title="{{ $item->post_title }}">
                                 <div class="rb-pic">
-                                    <img src="{{ URL::asset('uploads/post/'.$item->post_image) }}" alt="">
+                                    <img src="{{ $item->post_image }}" alt="">
                                 </div>
                                 <div class="rb-text">
                                     <h6>{{ $item->post_title }}</h6>
@@ -63,7 +63,7 @@
                     <div class="col-lg-6 col-sm-6">
                         <div class="blog-item">
                             <div class="bi-pic">
-                                <img src="{{ URL::asset('uploads/post/'.$item->post_image) }}" alt="">
+                                <img src="{{ $item->post_image }}" alt="">
                             </div>
                             <div class="bi-text">
                                 <a href="{{ URL::to('/blog/view/'.$item->post_slug) }}">

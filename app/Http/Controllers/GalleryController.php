@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
+use Storage;
 
 class GalleryController extends Controller
 {
@@ -44,7 +45,7 @@ class GalleryController extends Controller
             echo    "<tr>
                         <td>$item->id</td>
                         <td contenteditable='true' class='edit_gallery_name' data-gal_id='$item->id'>$item->name</td>
-                        <td><img src=" . url('uploads/gallery/' . $item->path) . " alt=''
+                        <td><img src='" . $item->path . "' alt=''
                                 style='width: 150px'></td>
                                 <td><button class='btn btn-outline-warning' name='delete_gallery'
                                 data-gal_id='$item->id'><i class='fas fa-trash-alt'></i></button></td>
@@ -64,10 +65,11 @@ class GalleryController extends Controller
                     $name_image = current(explode('.', $get_name_image));
                     $new_image = $name_image . date('dmYHis')  . '.' . $image->getClientOriginalExtension();
                     $image->move('uploads/gallery', $new_image);
+                    
                     $data = array();
                     $data['product_id'] = $id;
-                    $data['name'] = $name_image;
-                    $data['path'] = $new_image;
+                    $data['name'] = $new_image;
+                    $data['path'] = $this->upload_to_drive($new_image);
                     $this->gallery->create($data);
                 }
             }
@@ -82,9 +84,9 @@ class GalleryController extends Controller
     {
         $this->AuthLogin();
         try {
-            $data = array();
-            $data['name'] = $request->gallery_text;
-            $this->gallery->find($request->gallery_id)->update($data);
+            // $data = array();
+            // $data['name'] = $request->gallery_text;
+            // $this->gallery->find($request->gallery_id)->update($data);
         } catch (\Exception $exception) {
             echo $exception->getMessage();
         }
@@ -95,13 +97,40 @@ class GalleryController extends Controller
         $this->AuthLogin();
         try {
             $gallery = $this->gallery->find($request->gallery_id);
-            $image_path = 'uploads/gallery/' . $gallery->path;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
+            $this->delete_from_drive($gallery->name);
+            // $image_path = 'uploads/gallery/' . $gallery->path;
+            // if (File::exists($image_path)) {
+            //     File::delete($image_path);
+            // }
             $gallery->delete();
         } catch (\Exception $exception) {
             echo $exception->getMessage();
         }
     }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/gallery/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'gallery')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
+    }
+
 }

@@ -99,7 +99,7 @@ class CartController extends Controller
             if (isset($cart)) {
                 foreach ($cart as $item) {
                     $str_cart = $str_cart . '<tr>
-                        <td class="si-pic"><img src="' . url('uploads/product/' . $item->options->image) . '" alt="" width="100px"></td>
+                        <td class="si-pic"><img src="' . $item->options->image . '" alt="" width="100px"></td>
                         <td class="si-text">
                             <div class="product-selected">
                                 <p>' . number_format($item->price) . ' đ x ' . $item->qty . '</p>
@@ -198,7 +198,7 @@ class CartController extends Controller
             if (isset($cart)) {
                 foreach ($cart as $item) {
                     $str = $str . '<tr>
-                                        <td class="si-pic"><img src="' . url('uploads/product/' . $item->options->image) . '" alt="" width="100px"></td>
+                                        <td class="si-pic"><img src="' . $item->options->image . '" alt="" width="100px"></td>
                                         <td class="si-text">
                                             <div class="product-selected">
                                                 <p>' . number_format($item->price) . ' đ x ' . $item->qty . '</p>
@@ -260,7 +260,7 @@ class CartController extends Controller
             if (isset($cart)) {
                 foreach ($cart as $item) {
                     $str = $str . '<tr>
-                                        <td class="si-pic"><img src="' . url('uploads/product/' . $item->options->image) . '" alt="" width="100px"></td>
+                                        <td class="si-pic"><img src="' . $item->options->image . '" alt="" width="100px"></td>
                                         <td class="si-text">
                                             <div class="product-selected">
                                                 <p>' . number_format($item->price) . ' đ x ' . $item->qty . '</p>

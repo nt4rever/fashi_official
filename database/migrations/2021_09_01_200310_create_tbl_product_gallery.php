@@ -15,7 +15,7 @@ class CreateTblProductGallery extends Migration
     {
         Schema::create('tbl_product_gallery', function (Blueprint $table) {
             $table->id('id');
-            $table->string('name');
+            $table->string('name')->nullable();
             $table->string('path');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();

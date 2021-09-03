@@ -51,7 +51,7 @@
                                 <td>{{ $item->id }}</td>
                                 <td contenteditable='true' class='edit_gallery_name' data-gal_id='{{ $item->id }}'>
                                     {{ $item->name }}</td>
-                                <td><img src="{{ URL::asset('uploads/gallery/'.$item->path) }}" alt=""
+                                <td><img src="{{$item->path }}" alt=""
                                         style="width: 150px"></td>
                                 @hasrole(['admin','author'])
                                 <td><button class="btn btn-outline-warning" name='delete_gallery'
@@ -137,25 +137,25 @@
         }
     });
 
-    $(document).on('blur', '.edit_gallery_name', function () {
-        var gal_id = $(this).data('gal_id');
-        var gal_text = $(this).text();
-        let _token = $('meta[name="csrf-token"]').attr('content');
-        $.ajax({
-            type: "POST",
-            cache: false,
-            url: "{{url('/update-product-gallery-name')}}",
-            data: { gallery_id: gal_id, gallery_text: gal_text, _token: _token },
-            dataType: "html",
-            success: function (data) {
-                console.log(data)
-            }
-            ,
-            error: function (error) {
-                swal("Erorr!");
-            }
-        });
-    });
+    // $(document).on('blur', '.edit_gallery_name', function () {
+    //     var gal_id = $(this).data('gal_id');
+    //     var gal_text = $(this).text();
+    //     let _token = $('meta[name="csrf-token"]').attr('content');
+    //     $.ajax({
+    //         type: "POST",
+    //         cache: false,
+    //         url: "{{url('/update-product-gallery-name')}}",
+    //         data: { gallery_id: gal_id, gallery_text: gal_text, _token: _token },
+    //         dataType: "html",
+    //         success: function (data) {
+    //             console.log(data)
+    //         }
+    //         ,
+    //         error: function (error) {
+    //             swal("Erorr!");
+    //         }
+    //     });
+    // });
 
     $("button[name = 'delete_gallery']").click(function () {
         swal({

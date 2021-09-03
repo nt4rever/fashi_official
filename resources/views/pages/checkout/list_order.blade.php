@@ -156,7 +156,7 @@
                                                             @foreach ($item_1->order_detail as $item)
                                                             <tr>
                                                                 <td class="cart-pic first-row"><img
-                                                                        src="{{ URL::asset('uploads/product/'.$item->product->product_image) }}"
+                                                                        src="{{ $item->product->product_image }}"
                                                                         alt="" style="width: 50px"></td>
                                                                 <td class="cart-title first-row">
                                                                     <h5>{{ $item->product_name }}</h5>

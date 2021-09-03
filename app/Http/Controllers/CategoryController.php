@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
-
+use Storage;
 
 class CategoryController extends Controller
 {
@@ -67,9 +67,11 @@ class CategoryController extends Controller
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('uploads/category', $new_image);
-            $category->category_image = $new_image;
+            $category->category_image_name = $new_image;
+            $category->category_image = $this->upload_to_drive($new_image);
         } else {
             $category->category_image = "";
+            $category->category_image_name = "";
         }
         $category->save();
         return Redirect::to('/list-category');
@@ -128,11 +130,8 @@ class CategoryController extends Controller
         } else if (count($category->products) > 0) {
             echo "Bạn phải xoá hết tất cả sản phẩm thuộc danh mục này!";
         } else {
-
-            $image_path = 'uploads/category/' . $category->category_image;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
+            $image_path = $category->category_image_name;
+            $this->delete_from_drive($image_path);
             $category->delete();
             echo "true";
         }
@@ -164,14 +163,13 @@ class CategoryController extends Controller
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
             $get_image->move('uploads/category', $new_image);
-            $data['category_image'] = $new_image;
-            $this_img = $this->category->find($id);
-            try {
-                unlink('uploads/category/' . $this_img->category_image);
-            } catch (\Exception $exception) {
-            }
+            $data['category_image_name'] = $new_image;
+            $data['category_image'] = $this->upload_to_drive($new_image);
+            $old_image = $this->category->find($id);
+            $this->delete_from_drive($old_image->category_image_name);
         } else {
             $data['category_image'] = "";
+            $data['category_image_name'] = "";
         }
 
         Category::where('category_id', $id)->update($data);
@@ -201,5 +199,30 @@ class CategoryController extends Controller
             $category->save();
         }
         echo "true";
+    }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/category/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'category')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
     }
 }

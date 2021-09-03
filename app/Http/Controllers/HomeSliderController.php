@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use Storage;
 
 class HomeSliderController extends Controller
 {
@@ -53,8 +54,9 @@ class HomeSliderController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('uploads/homeslider', $new_image);
-            $home_slider->home_slider_image = $new_image;
+            $get_image->move('uploads/home_slider', $new_image);
+            $home_slider->home_slider_image_name = $new_image;
+            $home_slider->home_slider_image = $this->upload_to_drive($new_image);
         } else {
             $home_slider->home_slider_image = '';
         }
@@ -107,14 +109,16 @@ class HomeSliderController extends Controller
             $get_name_image = $get_image->getClientOriginalName();
             $name_image = current(explode('.', $get_name_image));
             $new_image = $name_image . date('dmYHis')  . '.' . $get_image->getClientOriginalExtension();
-            $get_image->move('uploads/homeslider', $new_image);
+            $get_image->move('uploads/home_slider', $new_image);
 
-            $image = $home_slider->home_slider_image;
-            $image_path = "uploads/homeslider/" . $image;
-            if (File::exists($image_path)) {
-                File::delete($image_path);
-            }
-            $home_slider->home_slider_image = $new_image;
+            $image = $home_slider->home_slider_image_name;
+            $this->delete_from_drive($image);
+            // $image_path = "uploads/homeslider/" . $image;
+            // if (File::exists($image_path)) {
+            //     File::delete($image_path);
+            // }
+            $home_slider->home_slider_image_name = $new_image;
+            $home_slider->home_slider_image = $this->upload_to_drive($new_image);
         }
         $home_slider->save();
 
@@ -131,13 +135,39 @@ class HomeSliderController extends Controller
     public function destroy($id)
     {
         $home_slider = HomeSlider::find($id);
-        $image = $home_slider->home_slider_image;
-        $image_path = "uploads/homeslider/" . $image;
-        if (File::exists($image_path)) {
-            File::delete($image_path);
-        }
+        $image = $home_slider->home_slider_image_name;
+        $this->delete_from_drive($image);
+        // $image_path = "uploads/homeslider/" . $image;
+        // if (File::exists($image_path)) {
+        //     File::delete($image_path);
+        // }
         $home_slider->delete();
         Session::flash('message', 'Xoá slide thành công!');
         return Redirect::to('/ad/home-slider');
+    }
+
+    private function upload_to_drive($file_name)
+    {
+        $file_path = public_path("uploads/home_slider/" . $file_name);
+        $file_data = File::get($file_path);
+        $contents = collect(Storage::cloud()->listContents('/', true));
+        $dir = $contents->where('type', '=', 'dir')
+            ->where('filename', '=', 'home_slider')
+            ->first();
+        $file_name = $dir['path'] . "/" . $file_name;
+        Storage::cloud()->put($file_name, $file_data);
+        $url = Storage::cloud()->url($file_name);
+        return $url;
+    }
+
+    private function delete_from_drive($filename)
+    {
+        $contents = collect(Storage::cloud()->listContents("/", true));
+        $file = $contents
+            ->where('type', '=', 'file')
+            ->where('filename', '=', pathinfo($filename, PATHINFO_FILENAME))
+            ->where('extension', '=', pathinfo($filename, PATHINFO_EXTENSION))
+            ->first();
+        Storage::cloud()->delete($file['path']);
     }
 }

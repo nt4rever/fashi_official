@@ -21,6 +21,7 @@ class CreateTblCustomer extends Migration
             $table->string('customer_address')->nullable();
             $table->string('customer_phone', 20)->nullable();
             $table->string('customer_image')->nullable();
+            $table->string('customer_image_name')->nullable();
             $table->string('customer_token')->nullable();
             $table->tinyInteger('customer_status')->default(0);
             $table->timestamps();

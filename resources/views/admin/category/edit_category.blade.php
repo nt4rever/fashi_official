@@ -32,7 +32,7 @@
                             <label for="category_image">Ảnh danh mục</label>
                             <input type="file" class="form-control" name="category_image" id="category_image">
                             @isset($category_edit->category_image)
-                            <img src="{{ URL::asset('public/uploads/category/'.$category_edit->category_image) }}"
+                            <img src="{{ $category_edit->category_image }}"
                                 class="mt-3" alt="" style="width: 150px">
                             @endisset
                         </div>

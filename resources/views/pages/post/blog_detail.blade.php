@@ -14,7 +14,7 @@
                                 {{ date('d/m/Y', strtotime($post->created_at)) }}</span></p>
                     </div>
                     <div class="blog-large-pic">
-                        <img src="{{ URL::asset('uploads/post/'.$post->post_image) }}" alt="">
+                        <img src="{{ $post->post_image }}" alt="">
                     </div>
                     <div class="blog-detail-desc">
                         {!! $post->post_content !!}
