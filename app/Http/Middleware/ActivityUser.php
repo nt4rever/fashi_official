@@ -26,7 +26,7 @@ class ActivityUser
         }
         if (Auth::check()) {
             $expiresAt = Carbon::now()->addMinutes(1);
-            Cache::put('admin' . Auth::user()->admin_id, true, $expiresAt);
+            Cache::put('admin' . Auth::user()->id, true, $expiresAt);
         }
         return $next($request);
     }

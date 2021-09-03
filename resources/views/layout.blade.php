@@ -75,16 +75,16 @@
 
                     <div class="lan-selector">
                         <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                            @if (Session::get('language')=='vn')
-                            <option value='en' data-image="{{ URL::asset('frontend/img/us_16.png') }}"
-                                data-imagecss="flag yt" data-title="English">English</option>
-                            <option value='vn' data-image="{{ URL::asset('frontend/img/vn_16.png') }}"
-                                data-imagecss="flag yt" data-title="English" selected>Vietnam</option>
-                            @else
+                            @if (Session::get('language')=='en')
                             <option value='en' data-image="{{ URL::asset('frontend/img/us_16.png') }}"
                                 data-imagecss="flag yt" data-title="English" selected>English</option>
                             <option value='vn' data-image="{{ URL::asset('frontend/img/vn_16.png') }}"
                                 data-imagecss="flag yt" data-title="English">Vietnam</option>
+                            @else
+                            <option value='vn' data-image="{{ URL::asset('frontend/img/vn_16.png') }}"
+                                data-imagecss="flag yt" data-title="English" selected>Vietnam</option>
+                            <option value='en' data-image="{{ URL::asset('frontend/img/us_16.png') }}"
+                                data-imagecss="flag yt" data-title="English">English</option>
                             @endif
 
                         </select>
