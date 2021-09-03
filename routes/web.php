@@ -309,4 +309,4 @@ Route::get('/delete-image-ckeditor', [UploadController::class, 'ckeditor_delete'
 // Route::get('/config', [ConfigController::class, 'config']);
 // Route::get('/api', [ConfigController::class, 'api']);
 
- Route::get('/drive', [DocumentController::class, 'list']);
+//  Route::get('/drive', [DocumentController::class, 'list']);
