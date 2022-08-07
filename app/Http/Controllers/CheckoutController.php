@@ -257,7 +257,7 @@ class CheckoutController extends Controller
         $vnp_TmnCode = "W2H8M1CZ"; //Mã website tại VNPAY 
         $vnp_HashSecret = "RDOXWLQLKDWRLJKAQWFDDSUKZYKWWVVF"; //Chuỗi bí mật
         $vnp_Url = "http://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-        $vnp_Returnurl = "https://xfashi.herokuapp.com/checkout-payment";
+        $vnp_Returnurl = "https://fashi.nt4rever.tech/checkout-payment";
         $vnp_TxnRef = $order_id;
         $vnp_OrderInfo = 'thanh toan vn pay';
         $vnp_OrderType = 'fashion';

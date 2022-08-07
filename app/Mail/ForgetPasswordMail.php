@@ -32,7 +32,7 @@ class ForgetPasswordMail extends Mailable
      */
     public function build()
     {
-        return $this->from('lvtan.19it1@vku.udn.vn')->subject("Fashi shop - Đổi mật khẩu")
+        return $this->from(env('MAIL_FROM_ADDRESS', 'tan@nt4rever.tech'))->subject("Fashi shop - Đổi mật khẩu")
             ->view('admin.mail.forget_password');
     }
 }

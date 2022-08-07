@@ -36,7 +36,7 @@ class ConfirmOrderMail extends Mailable
 
     public function build()
     {
-        return $this->from('lvtan.19it1@vku.udn.vn')->subject("Fashi shop - Xác nhận đơn hàng")
+        return $this->from(env('MAIL_FROM_ADDRESS', 'tan@nt4rever.tech'))->subject("Fashi shop - Xác nhận đơn hàng")
             ->view('admin.mail.confirm')->attach($this->file_attach);
     }
 }
