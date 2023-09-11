@@ -1,0 +1,17 @@
+{
+  "i18n-ally.localesPaths": [
+    "resources/lang",
+    "public/ckeditor/lang",
+    "public/backend/ckeditor/lang",
+    "public/backend/plugins/fullcalendar/locales",
+    "public/backend/plugins/jsgrid/i18n",
+    "public/backend/plugins/moment/locale",
+    "public/backend/plugins/summernote/lang",
+    "public/ckeditor/plugins/syntaxhighlight/lang",
+    "public/backend/plugins/select2/js/i18n",
+    "public/ckeditor/plugins/a11yhelp/dialogs/lang",
+    "public/ckeditor/plugins/specialchar/dialogs/lang",
+    "public/backend/ckeditor/plugins/a11yhelp/dialogs/lang",
+    "public/backend/ckeditor/plugins/specialchar/dialogs/lang"
+  ]
+}

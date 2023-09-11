@@ -63,12 +63,12 @@
                                 <a href="{{ URL::to('/forget-password-customer') }}" class="forget-pass">{{ __('Forget your Password') }}</a>
                             </div>
                         </div>
-                        <div class="group-input">
+                        {{-- <div class="group-input">
                             <a href="{{ URL::to('/login-customer-google') }}" class="btn btn-outline-secondary"><img
                                     src="{{ URL::asset('frontend/img/google.png') }}" width="50" alt=""> Google</a>
                             <a href="{{ URL::to('/login-customer-facebook') }}" class="btn btn-outline-secondary"><img
                                     src="{{ URL::asset('frontend/img/facebook.png') }}" width="50" alt=""> Facebook</a>
-                        </div>
+                        </div> --}}
                         <div class="g-recaptcha" data-sitekey="{{env('CAPTCHA_KEY')}}"></div>
                         <br />
                         @if($errors->has('g-recaptcha-response'))
